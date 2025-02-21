@@ -18,7 +18,7 @@ export default function Forget() {
         "https://upskilling-egypt.com:3006/api/v1/Users/Reset/Request",
         data
       );
-      navigate("/reset");
+      navigate("/foodapp/reset");
 
       toast.success(response.data.message, {
         theme: "light",

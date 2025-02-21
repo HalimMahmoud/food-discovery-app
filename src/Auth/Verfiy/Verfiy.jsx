@@ -18,7 +18,7 @@ export default function Verfiy() {
         "https://upskilling-egypt.com:3006/api/v1/Users/Login",
         data
       );
-      navigate("/dashboard");
+      navigate("/foodapp/dashboard");
 
       toast.success(response.data.message, {
         theme: "light",

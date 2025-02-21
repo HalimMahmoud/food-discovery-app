@@ -101,10 +101,10 @@ export default function Login() {
                 )}
 
                 <div className="links d-flex justify-content-between my-3">
-                  <Link className="text-black" to="foodapp/register">
+                  <Link className="text-black" to="register">
                     Register?
                   </Link>
-                  <Link className="text-success" to="foodapp/forget">
+                  <Link className="text-success" to="forget">
                     Forget Password?
                   </Link>
                 </div>

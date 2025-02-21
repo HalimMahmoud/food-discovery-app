@@ -17,7 +17,7 @@ import { ToastContainer } from "react-toastify";
 
 const routes = createBrowserRouter([
   {
-    path: "",
+    path: "foodapp",
     element: <AuthLayer />,
     errorElement: <NotFound />,
     children: [
@@ -44,7 +44,7 @@ const routes = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard",
+    path: "foodapp/dashboard",
     element: <MasterLayer />,
     errorElement: <NotFound />,
 

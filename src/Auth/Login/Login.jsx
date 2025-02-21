@@ -18,7 +18,7 @@ export default function Login() {
         "https://upskilling-egypt.com:3006/api/v1/Users/Login",
         data
       );
-      navigate("/dashboard");
+      navigate("/foodapp/dashboard");
 
       toast.success("Logged in successfully", {
         theme: "light",
@@ -101,10 +101,10 @@ export default function Login() {
                 )}
 
                 <div className="links d-flex justify-content-between my-3">
-                  <Link className="text-black" to="register">
+                  <Link className="text-black" to="foodapp/register">
                     Register?
                   </Link>
-                  <Link className="text-success" to="forget">
+                  <Link className="text-success" to="foodapp/forget">
                     Forget Password?
                   </Link>
                 </div>

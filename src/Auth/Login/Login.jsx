@@ -3,15 +3,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 export default function Login() {
   const navigate = useNavigate();
+  const formSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, "Password length should be at least 8 characters")
+      .max(20, "Password cannot exceed more than 20 characters"),
+  });
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    mode: "onTouched",
+    resolver: yupResolver(formSchema),
+  });
 
+  const [toggle, setToggle] = useState(false);
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
@@ -53,14 +67,7 @@ export default function Login() {
                     </span>
                   </div>
                   <input
-                    {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value:
-                          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                        message: "Please enter a valid mail ",
-                      },
-                    })}
+                    {...register("email")}
                     type="text"
                     className="form-control"
                     placeholder="Enter your E-mail"
@@ -82,19 +89,20 @@ export default function Login() {
                     </span>
                   </div>
                   <input
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 5,
-                        message: "Enter min 5 charaters at least",
-                      },
-                    })}
-                    type="password"
+                    {...register("password")}
+                    type={toggle ? "text" : "password"}
                     className="form-control"
                     placeholder="Password"
                     aria-label="Password"
                     aria-describedby="basic-addon1"
                   />
+                  <i
+                    id="showpass"
+                    className="fa fa-eye eye-icon"
+                    onClick={() => {
+                      setToggle(!toggle);
+                    }}
+                  ></i>
                 </div>
                 {errors.password && (
                   <div className="pb-3">{errors.password.message}</div>

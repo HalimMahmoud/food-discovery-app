@@ -38,3 +38,9 @@ input {
   border: 0 !important;
   padding: 1rem 0rem 1rem 1.5rem !important;
 }
+
+.eye-icon {
+  position: absolute;
+  right: 25px;
+  top: 20px;
+}

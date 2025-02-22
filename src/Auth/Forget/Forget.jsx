@@ -3,14 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 export default function Forget() {
   const navigate = useNavigate();
+  const formSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+  });
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    mode: "onTouched",
+    resolver: yupResolver(formSchema),
+  });
 
   const onSubmit = async (data) => {
     try {

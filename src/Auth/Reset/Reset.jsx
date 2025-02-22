@@ -3,14 +3,38 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 export default function Reset() {
   const navigate = useNavigate();
+  const formSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    seed: Yup.string()
+      .required("OTP is required")
+      .length(4, "OTP length is 4 characters"),
+    password: Yup.string()
+      .matches(
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/,
+        "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+      )
+      .required("Password is required")
+      .min(8, "Password length should be at least 8 characters")
+      .max(20, "Password cannot exceed more than 20 characters"),
+    confirmPassword: Yup.string()
+      .required("Confirm Password is required")
+      .min(8, "Password length should be at least 8 characters")
+      .max(20, "Password cannot exceed more than 20 characters")
+      .oneOf([Yup.ref("password")], "Passwords do not match"),
+  });
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    mode: "onTouched",
+    resolver: yupResolver(formSchema),
+  });
 
   const onSubmit = async (data) => {
     try {
@@ -82,13 +106,7 @@ export default function Reset() {
                     </span>
                   </div>
                   <input
-                    {...register("seed", {
-                      required: "otp is required",
-                      minLength: {
-                        value: 4,
-                        message: "Enter min 4 charaters at least",
-                      },
-                    })}
+                    {...register("seed")}
                     type="text"
                     className="form-control"
                     placeholder="OTP"
@@ -106,17 +124,11 @@ export default function Reset() {
                       className="input-group-text w-100 h-100"
                       id="basic-addon1"
                     >
-                      <i className="fa fa-key"></i>
+                      <i className="fa fa-lock"></i>
                     </span>
                   </div>
                   <input
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 5,
-                        message: "Enter min 5 charaters at least",
-                      },
-                    })}
+                    {...register("password")}
                     type="password"
                     className="form-control"
                     placeholder="New Password"
@@ -124,24 +136,20 @@ export default function Reset() {
                     aria-describedby="basic-addon1"
                   />
                 </div>
-
+                {errors.password && (
+                  <div className="pb-3">{errors.password.message}</div>
+                )}
                 <div className="input-group mb-3">
                   <div className="input-group-prepend ">
                     <span
                       className="input-group-text w-100 h-100"
                       id="basic-addon1"
                     >
-                      <i className="fa fa-key"></i>
+                      <i className="fa fa-lock"></i>
                     </span>
                   </div>
                   <input
-                    {...register("confirmPassword", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 5,
-                        message: "Enter min 5 charaters at least",
-                      },
-                    })}
+                    {...register("confirmPassword")}
                     type="password"
                     className="form-control"
                     placeholder="Confirm New Password"
@@ -149,6 +157,9 @@ export default function Reset() {
                     aria-describedby="basic-addon1"
                   />
                 </div>
+                {errors.confirmPassword && (
+                  <div className="pb-3">{errors.confirmPassword.message}</div>
+                )}
                 <button type="submit" className="btn btn-success w-100 mt-5">
                   Reset Password
                 </button>

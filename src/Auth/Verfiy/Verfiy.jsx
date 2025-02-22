@@ -3,14 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 export default function Verfiy() {
   const navigate = useNavigate();
+  const formSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+  });
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    mode: "onTouched",
+    resolver: yupResolver(formSchema),
+  });
 
   const onSubmit = async (data) => {
     try {
@@ -53,14 +61,7 @@ export default function Verfiy() {
                     </span>
                   </div>
                   <input
-                    {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value:
-                          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                        message: "Please enter a valid mail ",
-                      },
-                    })}
+                    {...register("email")}
                     type="text"
                     className="form-control"
                     placeholder="Email"

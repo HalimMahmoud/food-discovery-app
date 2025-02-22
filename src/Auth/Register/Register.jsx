@@ -1,5 +1,5 @@
 import Logo from "../../assets/4 3.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -12,18 +12,28 @@ export default function Register() {
 
   const navigate = useNavigate();
   const formSchema = Yup.object().shape({
+    userName: Yup.string()
+      .required("Username is required")
+      .min(4, "Username length should be at least 4 characters")
+      .matches(
+        /^[A-Za-z]*\d+/,
+        "Username must contain characters and end with numbers without spaces"
+      ),
     email: Yup.string().email("Invalid email").required("Email is required"),
-    seed: Yup.string()
-      .required("OTP is required")
-      .length(4, "OTP length is 4 characters"),
+    country: Yup.string()
+      .required("Country name is required")
+      .min(4, "Country name length should be at least 4 characters"),
+    phoneNumber: Yup.string()
+      .required("Phone number is required")
+      .matches(/^01[0125][0-9]{8}$/, "Invalid phone number"),
     password: Yup.string()
+      .required("Password is required")
+      .min(8, "Password length should be at least 8 characters")
+      .max(20, "Password cannot exceed more than 20 characters")
       .matches(
         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/,
         "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
-      )
-      .required("Password is required")
-      .min(8, "Password length should be at least 8 characters")
-      .max(20, "Password cannot exceed more than 20 characters"),
+      ),
     confirmPassword: Yup.string()
       .required("Confirm Password is required")
       .min(8, "Password length should be at least 8 characters")
@@ -46,7 +56,7 @@ export default function Register() {
         "https://upskilling-egypt.com:3006/api/v1/Users/Register",
         data
       );
-      navigate("/");
+      navigate("/verfiy");
 
       toast.success(response.data.message, {
         theme: "light",
@@ -75,153 +85,173 @@ export default function Register() {
                 role="form"
                 onSubmit={handleSubmit(onSubmit)}
               >
-                <div className="input-group mb-3 col">
-                  <div className="input-group-prepend ">
-                    <span
-                      className="input-group-text w-100 h-100"
-                      id="basic-addon1"
-                    >
-                      <i className="fa fa-user"></i>
-                    </span>
+                <div className="col">
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend ">
+                      <span
+                        className="input-group-text w-100 h-100"
+                        id="basic-addon1"
+                      >
+                        <i className="fa fa-user"></i>
+                      </span>
+                    </div>
+                    <input
+                      {...register("userName")}
+                      type="text"
+                      className="form-control"
+                      placeholder="User Name"
+                      aria-label="User Name"
+                      aria-describedby="basic-addon1"
+                    />
                   </div>
-                  <input
-                    {...register("userName")}
-                    type="text"
-                    className="form-control"
-                    placeholder="User Name"
-                    aria-label="User Name"
-                    aria-describedby="basic-addon1"
-                  />
+                  {errors.userName && (
+                    <div className="pb-3">{errors.userName.message}</div>
+                  )}
                 </div>
-                {errors.seed && (
-                  <div className="pb-3">{errors.seed.message}</div>
-                )}
-                <div className="input-group mb-3 col">
-                  <div className="input-group-prepend ">
-                    <span
-                      className="input-group-text w-100 h-100"
-                      id="basic-addon1"
-                    >
-                      <i className="fa fa-envelope"></i>
-                    </span>
+                <div className="col">
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend ">
+                      <span
+                        className="input-group-text w-100 h-100"
+                        id="basic-addon1"
+                      >
+                        <i className="fa fa-envelope"></i>
+                      </span>
+                    </div>
+                    <input
+                      {...register("email")}
+                      type="text"
+                      className="form-control"
+                      placeholder="Email"
+                      aria-label="Email"
+                      aria-describedby="basic-addon1"
+                    />
                   </div>
-                  <input
-                    {...register("email")}
-                    type="text"
-                    className="form-control"
-                    placeholder="Email"
-                    aria-label="Email"
-                    aria-describedby="basic-addon1"
-                  />
+                  {errors.email && (
+                    <div className="pb-3">{errors.email.message}</div>
+                  )}
                 </div>
-                {errors.email && (
-                  <div className="pb-3">{errors.email.message}</div>
-                )}
+                <div className="w-100"></div>
+                <div className="col">
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend ">
+                      <span
+                        className="input-group-text w-100 h-100"
+                        id="basic-addon1"
+                      >
+                        <i className="fa fa-globe"></i>
+                      </span>
+                    </div>
+                    <input
+                      {...register("country")}
+                      type="text"
+                      className="form-control"
+                      placeholder="Country"
+                      aria-label="Country"
+                      aria-describedby="basic-addon1"
+                    />
+                  </div>
+                  {errors.country && (
+                    <div className="pb-3">{errors.country.message}</div>
+                  )}
+                </div>
+                <div className="col">
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend ">
+                      <span
+                        className="input-group-text w-100 h-100"
+                        id="basic-addon1"
+                      >
+                        <i className="fa fa-mobile-screen"></i>
+                      </span>
+                    </div>
+                    <input
+                      {...register("phoneNumber")}
+                      type="text"
+                      className="form-control"
+                      placeholder="Phone Number"
+                      aria-label="Phone Number"
+                      aria-describedby="basic-addon1"
+                    />
+                  </div>
+                  {errors.phoneNumber && (
+                    <div className="pb-3">{errors.phoneNumber.message}</div>
+                  )}
+                </div>
 
                 <div className="w-100"></div>
-                <div className="input-group mb-3 col">
-                  <div className="input-group-prepend ">
-                    <span
-                      className="input-group-text w-100 h-100"
-                      id="basic-addon1"
-                    >
-                      <i className="fa fa-globe"></i>
-                    </span>
-                  </div>
-                  <input
-                    {...register("country")}
-                    type="text"
-                    className="form-control"
-                    placeholder="Country"
-                    aria-label="Country"
-                    aria-describedby="basic-addon1"
-                  />
-                </div>
-                {errors.email && (
-                  <div className="pb-3">{errors.email.message}</div>
-                )}
 
-                <div className="input-group mb-3 col">
-                  <div className="input-group-prepend ">
-                    <span
-                      className="input-group-text w-100 h-100"
-                      id="basic-addon1"
-                    >
-                      <i className="fa fa-mobile-screen"></i>
-                    </span>
+                <div className="col">
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend ">
+                      <span
+                        className="input-group-text w-100 h-100"
+                        id="basic-addon1"
+                      >
+                        <i className="fa fa-lock"></i>
+                      </span>
+                    </div>
+                    <input
+                      {...register("password")}
+                      type={toggle ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Password"
+                      aria-label="Password"
+                      aria-describedby="basic-addon1"
+                    />
+                    <i
+                      className="fa fa-eye showpass"
+                      onClick={() => {
+                        setToggle(!toggle);
+                      }}
+                    ></i>
                   </div>
-                  <input
-                    {...register("phoneNumber")}
-                    type="text"
-                    className="form-control"
-                    placeholder="Phone Number"
-                    aria-label="Phone Number"
-                    aria-describedby="basic-addon1"
-                  />
-                </div>
-                {errors.seed && (
-                  <div className="pb-3">{errors.seed.message}</div>
-                )}
-
-                <div className="w-100"></div>
-                <div className="input-group mb-3 col">
-                  <div className="input-group-prepend ">
-                    <span
-                      className="input-group-text w-100 h-100"
-                      id="basic-addon1"
-                    >
-                      <i className="fa fa-lock"></i>
-                    </span>
-                  </div>
-                  <input
-                    {...register("password")}
-                    type={toggle ? "text" : "password"}
-                    className="form-control"
-                    placeholder="Password"
-                    aria-label="Password"
-                    aria-describedby="basic-addon1"
-                  />
-                  <i
-                    className="fa fa-eye showpass"
-                    onClick={() => {
-                      setToggle(!toggle);
-                    }}
-                  ></i>
+                  {errors.password && (
+                    <div className="pb-3">{errors.password.message}</div>
+                  )}
                 </div>
 
-                {errors.password && (
-                  <div className="pb-3">{errors.password.message}</div>
-                )}
-                <div className="input-group mb-3 col">
-                  <div className="input-group-prepend ">
-                    <span
-                      className="input-group-text w-100 h-100"
-                      id="basic-addon1"
-                    >
-                      <i className="fa fa-lock"></i>
-                    </span>
+                <div className="col">
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend ">
+                      <span
+                        className="input-group-text w-100 h-100"
+                        id="basic-addon1"
+                      >
+                        <i className="fa fa-lock"></i>
+                      </span>
+                    </div>
+                    <input
+                      {...register("confirmPassword")}
+                      type={toggleConfirm ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Confirm Password"
+                      aria-label="Confirm Password"
+                      aria-describedby="basic-addon1"
+                    />
+                    <i
+                      className="fa fa-eye showpass"
+                      onClick={() => {
+                        setToggleConfirm(!toggleConfirm);
+                      }}
+                    ></i>
                   </div>
-                  <input
-                    {...register("confirmPassword")}
-                    type={toggleConfirm ? "text" : "password"}
-                    className="form-control"
-                    placeholder="Confirm Password"
-                    aria-label="Confirm Password"
-                    aria-describedby="basic-addon1"
-                  />
-                  <i
-                    className="fa fa-eye showpass"
-                    onClick={() => {
-                      setToggleConfirm(!toggleConfirm);
-                    }}
-                  ></i>
+
+                  {errors.confirmPassword && (
+                    <div className="pb-3">{errors.confirmPassword.message}</div>
+                  )}
                 </div>
 
-                {errors.confirmPassword && (
-                  <div className="pb-3">{errors.confirmPassword.message}</div>
-                )}
-                <button type="submit" className="btn btn-success w-100 mt-5">
-                  Reset Password
+                <div className="links d-flex justify-content-end my-3">
+                  {/* <Link className="text-black" to="register">
+                    Register?
+                  </Link> */}
+                  <Link className="text-success" to="/">
+                    Login Now?
+                  </Link>
+                </div>
+                <button type="submit" className="btn btn-success w-50 m-auto">
+                  Register
                 </button>
               </form>
             </div>

@@ -29,7 +29,7 @@ export default function Verfiy() {
         "https://upskilling-egypt.com:3006/api/v1/Users/verify",
         data
       );
-      navigate("/dashboard");
+      navigate("/");
 
       toast.success(response.data.message, {
         theme: "light",
@@ -99,7 +99,7 @@ export default function Verfiy() {
                 )}
 
                 <button type="submit" className="btn btn-success w-100 mt-5">
-                  Login
+                  Send
                 </button>
               </form>
             </div>

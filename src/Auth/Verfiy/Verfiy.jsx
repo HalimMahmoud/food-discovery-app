@@ -73,7 +73,7 @@ export default function Verfiy() {
                   />
                 </div>
                 {errors.email && (
-                  <div className="pb-3">{errors.email.message}</div>
+                  <div className="pb-3 text-danger">{errors.email.message}</div>
                 )}
 
                 <div className="input-group mb-3">
@@ -95,7 +95,7 @@ export default function Verfiy() {
                   />
                 </div>
                 {errors.code && (
-                  <div className="pb-3">{errors.code.message}</div>
+                  <div className="pb-3 text-danger">{errors.code.message}</div>
                 )}
 
                 <button type="submit" className="btn btn-success w-100 mt-5">

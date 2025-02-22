@@ -77,7 +77,7 @@ export default function Forget() {
                   />
                 </div>
                 {errors.email && (
-                  <div className="pb-3">{errors.email.message}</div>
+                  <div className="pb-3 text-danger">{errors.email.message}</div>
                 )}
 
                 {/* <div className="links d-flex justify-content-between my-3">

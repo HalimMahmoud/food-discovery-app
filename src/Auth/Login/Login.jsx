@@ -76,7 +76,7 @@ export default function Login() {
                   />
                 </div>
                 {errors.email && (
-                  <div className="pb-3">{errors.email.message}</div>
+                  <div className="pb-3 text-danger">{errors.email.message}</div>
                 )}
 
                 <div className="input-group mb-3">
@@ -104,7 +104,9 @@ export default function Login() {
                   ></i>
                 </div>
                 {errors.password && (
-                  <div className="pb-3">{errors.password.message}</div>
+                  <div className="pb-3 text-danger">
+                    {errors.password.message}
+                  </div>
                 )}
 
                 <div className="links d-flex justify-content-between my-3">

@@ -105,7 +105,9 @@ export default function Register() {
                     />
                   </div>
                   {errors.userName && (
-                    <div className="pb-3">{errors.userName.message}</div>
+                    <div className="pb-3 text-danger">
+                      {errors.userName.message}
+                    </div>
                   )}
                 </div>
                 <div className="col">
@@ -128,7 +130,9 @@ export default function Register() {
                     />
                   </div>
                   {errors.email && (
-                    <div className="pb-3">{errors.email.message}</div>
+                    <div className="pb-3 text-danger">
+                      {errors.email.message}
+                    </div>
                   )}
                 </div>
                 <div className="w-100"></div>
@@ -152,7 +156,9 @@ export default function Register() {
                     />
                   </div>
                   {errors.country && (
-                    <div className="pb-3">{errors.country.message}</div>
+                    <div className="pb-3 text-danger">
+                      {errors.country.message}
+                    </div>
                   )}
                 </div>
                 <div className="col">
@@ -175,7 +181,9 @@ export default function Register() {
                     />
                   </div>
                   {errors.phoneNumber && (
-                    <div className="pb-3">{errors.phoneNumber.message}</div>
+                    <div className="pb-3 text-danger">
+                      {errors.phoneNumber.message}
+                    </div>
                   )}
                 </div>
 
@@ -207,7 +215,9 @@ export default function Register() {
                     ></i>
                   </div>
                   {errors.password && (
-                    <div className="pb-3">{errors.password.message}</div>
+                    <div className="pb-3 text-danger">
+                      {errors.password.message}
+                    </div>
                   )}
                 </div>
 
@@ -238,7 +248,9 @@ export default function Register() {
                   </div>
 
                   {errors.confirmPassword && (
-                    <div className="pb-3">{errors.confirmPassword.message}</div>
+                    <div className="pb-3 text-danger">
+                      {errors.confirmPassword.message}
+                    </div>
                   )}
                 </div>
 

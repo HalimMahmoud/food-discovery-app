@@ -90,7 +90,7 @@ export default function Reset() {
                   />
                 </div>
                 {errors.email && (
-                  <div className="pb-3">{errors.email.message}</div>
+                  <div className="pb-3 text-danger">{errors.email.message}</div>
                 )}
 
                 <div className="input-group mb-3">
@@ -112,7 +112,7 @@ export default function Reset() {
                   />
                 </div>
                 {errors.seed && (
-                  <div className="pb-3">{errors.seed.message}</div>
+                  <div className="pb-3 text-danger">{errors.seed.message}</div>
                 )}
 
                 <div className="input-group mb-3">
@@ -142,7 +142,9 @@ export default function Reset() {
                 </div>
 
                 {errors.password && (
-                  <div className="pb-3">{errors.password.message}</div>
+                  <div className="pb-3 text-danger">
+                    {errors.password.message}
+                  </div>
                 )}
                 <div className="input-group mb-3">
                   <div className="input-group-prepend ">
@@ -171,7 +173,9 @@ export default function Reset() {
                 </div>
 
                 {errors.confirmPassword && (
-                  <div className="pb-3">{errors.confirmPassword.message}</div>
+                  <div className="pb-3 text-danger">
+                    {errors.confirmPassword.message}
+                  </div>
                 )}
                 <button type="submit" className="btn btn-success w-100 mt-5">
                   Reset Password

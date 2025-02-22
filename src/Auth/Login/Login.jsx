@@ -18,7 +18,7 @@ export default function Login() {
         "https://upskilling-egypt.com:3006/api/v1/Users/Login",
         data
       );
-      navigate("/foodapp/dashboard");
+      navigate("/dashboard");
 
       toast.success("Logged in successfully", {
         theme: "light",

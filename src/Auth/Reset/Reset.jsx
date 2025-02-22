@@ -5,7 +5,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { useState } from "react";
 export default function Reset() {
+  const [toggle, setToggle] = useState(false);
+  const [toggleConfirm, setToggleConfirm] = useState(false);
+
   const navigate = useNavigate();
   const formSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -77,14 +81,7 @@ export default function Reset() {
                     </span>
                   </div>
                   <input
-                    {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value:
-                          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                        message: "Please enter a valid mail ",
-                      },
-                    })}
+                    {...register("email")}
                     type="text"
                     className="form-control"
                     placeholder="Email"
@@ -129,13 +126,21 @@ export default function Reset() {
                   </div>
                   <input
                     {...register("password")}
-                    type="password"
+                    type={toggle ? "text" : "password"}
                     className="form-control"
                     placeholder="New Password"
                     aria-label="New Password"
                     aria-describedby="basic-addon1"
                   />
+                  <i
+                    id="showpass"
+                    className="fa fa-eye eye-icon"
+                    onClick={() => {
+                      setToggle(!toggle);
+                    }}
+                  ></i>
                 </div>
+
                 {errors.password && (
                   <div className="pb-3">{errors.password.message}</div>
                 )}
@@ -150,13 +155,21 @@ export default function Reset() {
                   </div>
                   <input
                     {...register("confirmPassword")}
-                    type="password"
+                    type={toggleConfirm ? "text" : "password"}
                     className="form-control"
                     placeholder="Confirm New Password"
                     aria-label="Confirm New Password"
                     aria-describedby="basic-addon1"
                   />
+                  <i
+                    id="showpass"
+                    className="fa fa-eye eye-icon"
+                    onClick={() => {
+                      setToggleConfirm(!toggleConfirm);
+                    }}
+                  ></i>
                 </div>
+
                 {errors.confirmPassword && (
                   <div className="pb-3">{errors.confirmPassword.message}</div>
                 )}

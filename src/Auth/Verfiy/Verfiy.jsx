@@ -9,6 +9,9 @@ export default function Verfiy() {
   const navigate = useNavigate();
   const formSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
+    code: Yup.string()
+      .required("OTP is required")
+      .length(4, "OTP length is 4 characters"),
   });
 
   const {
@@ -22,8 +25,8 @@ export default function Verfiy() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(
-        "https://upskilling-egypt.com:3006/api/v1/Users/Login",
+      const response = await axios.put(
+        "https://upskilling-egypt.com:3006/api/v1/Users/verify",
         data
       );
       navigate("/dashboard");
@@ -83,13 +86,7 @@ export default function Verfiy() {
                     </span>
                   </div>
                   <input
-                    {...register("otp", {
-                      required: "otp is required",
-                      minLength: {
-                        value: 4,
-                        message: "Enter min 4 charaters at least",
-                      },
-                    })}
+                    {...register("code")}
                     type="text"
                     className="form-control"
                     placeholder="OTP"
@@ -97,8 +94,8 @@ export default function Verfiy() {
                     aria-describedby="basic-addon1"
                   />
                 </div>
-                {errors.password && (
-                  <div className="pb-3">{errors.password.message}</div>
+                {errors.code && (
+                  <div className="pb-3">{errors.code.message}</div>
                 )}
 
                 <button type="submit" className="btn btn-success w-100 mt-5">

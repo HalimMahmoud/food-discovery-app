@@ -97,8 +97,7 @@ export default function Login() {
                     aria-describedby="basic-addon1"
                   />
                   <i
-                    id="showpass"
-                    className="fa fa-eye eye-icon"
+                    className="fa fa-eye showpass"
                     onClick={() => {
                       setToggle(!toggle);
                     }}

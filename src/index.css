@@ -44,3 +44,32 @@ input {
   right: 25px;
   top: 20px;
 }
+.sidebar-logo .ps-menu-button:hover {
+  background-color: transparent !important;
+  border: 0 !important;
+}
+.sidebar-logo img {
+  width: 150px;
+  height: 150px;
+  margin: 5px;
+}
+.ps-sidebar-root .ps-sidebar-container {
+  background-color: rgba(31, 38, 62, 1);
+  color: white;
+  border-top-right-radius: 50px;
+}
+
+.ps-sidebar-root .ps-sidebar-container .ps-menu-button:hover {
+  background-color: rgba(0, 146, 77, 0.1);
+  border-left: 3px solid rgba(0, 146, 71, 1);
+}
+
+.fa-spinner {
+  animation: rotateSpinner 800ms linear infinite;
+}
+
+@keyframes rotateSpinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -34,7 +34,7 @@ export default function Register() {
   const onSubmit = async (data) => {
     try {
       const response = await axiosInstance.post(Users_URLS.REGISTER, data);
-      navigate("/verfiy");
+      navigate("/verfiy", { state: { email: data.email } });
 
       toast.success(response.data.message, {
         theme: "light",

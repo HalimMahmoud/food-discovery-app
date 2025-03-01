@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,15 +6,18 @@ import { axiosInstance, Users_URLS } from "../../service/utils";
 import { verifySchemaValidation } from "../../service/vaildators";
 export default function Verfiy() {
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, defaultValues },
     handleSubmit,
   } = useForm({
+    defaultValues: { email: state?.email },
     mode: "onChange",
     resolver: yupResolver(verifySchemaValidation),
   });
+  const disabled = defaultValues.email ? "disabled" : "";
 
   const onSubmit = async (data) => {
     try {
@@ -48,6 +51,7 @@ export default function Verfiy() {
           </div>
           <input
             {...register("email")}
+            disabled={disabled}
             type="text"
             className="form-control"
             placeholder="Email"

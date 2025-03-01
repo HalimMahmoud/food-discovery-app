@@ -22,7 +22,7 @@ export default function Forget() {
         Users_URLS.FORGET_PASSWORD,
         data
       );
-      navigate("/reset");
+      navigate("/reset", { state: { email: data.email } });
 
       toast.success(response.data.message, {
         theme: "light",

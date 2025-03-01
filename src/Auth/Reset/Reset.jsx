@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,15 +10,18 @@ export default function Reset() {
   const [toggleConfirm, setToggleConfirm] = useState(false);
 
   const navigate = useNavigate();
-
+  const { state } = useLocation();
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, defaultValues },
     handleSubmit,
   } = useForm({
+    defaultValues: { email: state?.email },
     mode: "onChange",
     resolver: yupResolver(resetSehemaValidation),
   });
+
+  const disabled = defaultValues.email ? "disabled" : "";
 
   const onSubmit = async (data) => {
     try {
@@ -52,6 +55,7 @@ export default function Reset() {
           </div>
           <input
             {...register("email")}
+            disabled={disabled}
             type="text"
             className="form-control"
             placeholder="Email"

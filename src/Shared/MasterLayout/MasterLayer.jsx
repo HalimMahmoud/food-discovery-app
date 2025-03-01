@@ -10,7 +10,7 @@ export default function MasterLayer({ loginData, removeLoginData }) {
       <div className="">
         <SideBar removeLoginData={removeLoginData} />
       </div>
-      <div className="w-100">
+      <div className="w-100 m-2">
         <Navbar loginData={loginData} />
         <Outlet />
       </div>

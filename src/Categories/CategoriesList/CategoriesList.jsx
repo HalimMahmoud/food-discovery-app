@@ -23,18 +23,19 @@ export default function CategoriesList() {
     getAllCategories();
   }, []);
   return (
-    <div>
+    <div className="h-100">
       <Header
-        title="Categories Item"
+        title="Categories"
+        tag="Items"
         description="You can now add your items that any user can order it from the application and you can edit"
       />
 
-      <div className="title bg-info d-flex justify-content-between">
+      <div className="title d-flex justify-content-between my-3">
         <div className="caption">
-          <h3>Categories Details</h3>
+          <h3>Categories Table Details</h3>
           <span>You can check details</span>
         </div>
-        <button className="btn btn-success">Add new Category</button>
+        <button className="btn btn-success my-auto">Add new Category</button>
       </div>
       <table className="table">
         <thead>

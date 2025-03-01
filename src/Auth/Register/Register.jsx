@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { axiosInstance, Users_URLS } from "../../service/utils";
 import { registerSehemaValidation } from "../../service/vaildators";
 export default function Register() {
-  const [toggle, setToggle] = useState(true);
-  const [toggleConfirm, setToggleConfirm] = useState(true);
+  const [toggle, setToggle] = useState(false);
+  const [toggleConfirm, setToggleConfirm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -151,12 +151,16 @@ export default function Register() {
               aria-label="Password"
               aria-describedby="basic-addon1"
             />
-            <i
-              className="fa fa-eye showpass"
-              onClick={() => {
-                setToggle(!toggle);
-              }}
-            ></i>
+            <div className="input-group-append">
+              <span
+                className="input-group-text showpass"
+                onClick={() => {
+                  setToggle(!toggle);
+                }}
+              >
+                <i className={`fa ${toggle ? "fa-eye-slash" : "fa-eye"}`}></i>
+              </span>
+            </div>
           </div>
           {errors.password && (
             <div className="pb-3 text-danger">{errors.password.message}</div>
@@ -185,12 +189,18 @@ export default function Register() {
               aria-label="Confirm Password"
               aria-describedby="basic-addon1"
             />
-            <i
-              className="fa fa-eye showpass"
-              onClick={() => {
-                setToggleConfirm(!toggleConfirm);
-              }}
-            ></i>
+            <div className="input-group-append">
+              <span
+                className="input-group-text showpass"
+                onClick={() => {
+                  setToggleConfirm(!toggleConfirm);
+                }}
+              >
+                <i
+                  className={`fa ${toggleConfirm ? "fa-eye-slash" : "fa-eye"}`}
+                ></i>
+              </span>
+            </div>
           </div>
 
           {errors.confirmPassword && (

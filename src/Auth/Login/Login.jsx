@@ -30,9 +30,7 @@ export default function Login(props) {
       toast.success("Logged in successfully", {
         theme: "light",
       });
-      // console.log(response);
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message, {
         theme: "light",
       });
@@ -46,7 +44,7 @@ export default function Login(props) {
       <form className="" role="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="input-group mb-3">
           <div className="input-group-prepend ">
-            <span className="input-group-text w-100 h-100" id="basic-addon1">
+            <span className="input-group-text">
               <i className="fa fa-envelope"></i>
             </span>
           </div>
@@ -64,11 +62,12 @@ export default function Login(props) {
         )}
 
         <div className="input-group mb-3">
-          <div className="input-group-prepend ">
-            <span className="input-group-text w-100 h-100" id="basic-addon1">
+          <div className="input-group-prepend">
+            <span className="input-group-text">
               <i className="fa fa-lock"></i>
             </span>
           </div>
+
           <input
             {...register("password")}
             type={toggle ? "text" : "password"}
@@ -77,13 +76,18 @@ export default function Login(props) {
             aria-label="Password"
             aria-describedby="basic-addon1"
           />
-          <i
-            className="fa fa-eye showpass"
-            onClick={() => {
-              setToggle(!toggle);
-            }}
-          ></i>
+          <div className="input-group-append">
+            <span
+              className="input-group-text showpass"
+              onClick={() => {
+                setToggle(!toggle);
+              }}
+            >
+              <i className={`fa ${toggle ? "fa-eye-slash" : "fa-eye"}`}></i>
+            </span>
+          </div>
         </div>
+
         {errors.password && (
           <div className="pb-3 text-danger">{errors.password.message}</div>
         )}

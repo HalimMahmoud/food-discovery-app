@@ -100,13 +100,16 @@ export default function Reset() {
             aria-label="New Password"
             aria-describedby="basic-addon1"
           />
-          <i
-            id="showpass"
-            className="fa fa-eye eye-icon"
-            onClick={() => {
-              setToggle(!toggle);
-            }}
-          ></i>
+          <div className="input-group-append">
+            <span
+              className="input-group-text showpass"
+              onClick={() => {
+                setToggle(!toggle);
+              }}
+            >
+              <i className={`fa ${toggle ? "fa-eye-slash" : "fa-eye"}`}></i>
+            </span>
+          </div>
         </div>
 
         {errors.password && (
@@ -126,13 +129,18 @@ export default function Reset() {
             aria-label="Confirm New Password"
             aria-describedby="basic-addon1"
           />
-          <i
-            id="showpass"
-            className="fa fa-eye eye-icon"
-            onClick={() => {
-              setToggleConfirm(!toggleConfirm);
-            }}
-          ></i>
+          <div className="input-group-append">
+            <span
+              className="input-group-text showpass"
+              onClick={() => {
+                setToggleConfirm(!toggleConfirm);
+              }}
+            >
+              <i
+                className={`fa ${toggleConfirm ? "fa-eye-slash" : "fa-eye"}`}
+              ></i>
+            </span>
+          </div>
         </div>
 
         {errors.confirmPassword && (

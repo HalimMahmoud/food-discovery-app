@@ -57,6 +57,7 @@ input {
   width: 150px;
   height: 150px;
   margin: 5px;
+  border-left: 3px solid transparent;
 }
 .ps-sidebar-root .ps-sidebar-container {
   background-color: rgba(31, 38, 62, 1);
@@ -65,6 +66,10 @@ input {
 }
 .ps-sidebar-root {
   border: 0 !important;
+}
+
+.ps-sidebar-root .ps-sidebar-container .ps-menu-button {
+  border-left: 3px solid transparent;
 }
 
 .ps-sidebar-root .ps-sidebar-container .ps-menu-button:hover {
@@ -105,4 +110,16 @@ input {
 
 .header .caption {
   color: white;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background: rgba(248, 249, 251, 1) !important;
+}
+
+.close-icon {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  font-size: 20px;
+  margin: 20px;
 }

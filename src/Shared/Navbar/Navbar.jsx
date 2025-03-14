@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-export default function Navbar(props) {
-  console.log(props);
+export default function Navbar({ loginData }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <button
@@ -19,7 +18,7 @@ export default function Navbar(props) {
         <ul className="navbar-nav ms-auto ">
           <li className="nav-item active">
             <a className="nav-link" href="#">
-              {props?.loginData?.userEmail}
+              {loginData?.userEmail}
             </a>
           </li>
         </ul>

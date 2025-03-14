@@ -43,21 +43,24 @@ export default function SideBar({ removeLoginData }) {
           Users
         </MenuItem>
         <MenuItem
-          icon={<i className="fa fa-app"></i>}
+          icon={<i className="fa fa-bell-concierge"></i>}
           component={<Link to="recipes" />}
         >
           Recipes
         </MenuItem>
         <MenuItem
-          icon={<i className="fa fa-home"></i>}
+          icon={<i className="fa fa-list"></i>}
           component={<Link to="categories" />}
         >
           Categories
         </MenuItem>
-        <MenuItem icon={<i className="fa fa-lock"></i>}>
+        <MenuItem icon={<i className="fa fa-unlock"></i>}>
           Change Passowrd
         </MenuItem>
-        <MenuItem onClick={handleLogout} icon={<i className="fa fa-out"></i>}>
+        <MenuItem
+          onClick={handleLogout}
+          icon={<i className="fa fa-right-from-bracket"></i>}
+        >
           Logout
         </MenuItem>
       </Menu>

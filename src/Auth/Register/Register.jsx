@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
-import { axiosInstance, Users_URLS } from "../../service/utils";
-import { registerSehemaValidation } from "../../service/vaildators";
+import { registerSehemaValidation } from "../../services/vaildators";
+import { apiInstance } from "../../services/api/apiInstance";
+import { users_endpoints } from "../../services/api/apiConfig";
+
 export default function Register() {
   const [toggle, setToggle] = useState(false);
   const [toggleConfirm, setToggleConfirm] = useState(false);
@@ -33,7 +35,7 @@ export default function Register() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axiosInstance.post(Users_URLS.REGISTER, data);
+      const response = await apiInstance.post(users_endpoints.REGISTER, data);
       navigate("/verfiy", { state: { email: data.email } });
 
       toast.success(response.data.message, {

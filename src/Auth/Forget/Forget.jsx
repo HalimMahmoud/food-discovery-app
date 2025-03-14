@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axiosInstance, Users_URLS } from "../../service/utils";
-import { forgetSehemaValidation } from "../../service/vaildators";
+
+import { forgetSehemaValidation } from "../../services/vaildators";
+import { apiInstance } from "../../services/api/apiInstance";
+import { users_endpoints } from "../../services/api/apiConfig";
 export default function Forget() {
   const navigate = useNavigate();
 
@@ -18,8 +20,8 @@ export default function Forget() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axiosInstance.post(
-        Users_URLS.FORGET_PASSWORD,
+      const response = await apiInstance.post(
+        users_endpoints.RESET_REQUEST,
         data
       );
       navigate("/reset", { state: { email: data.email } });

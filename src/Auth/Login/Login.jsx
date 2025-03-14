@@ -3,10 +3,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axiosInstance, Users_URLS } from "../../service/utils";
-import { loginSehemaValidation } from "../../service/vaildators";
+
+import { loginSehemaValidation } from "../../services/vaildators";
+import { apiInstance } from "../../services/api/apiInstance";
+import { users_endpoints } from "../../services/api/apiConfig";
+
 // eslint-disable-next-line react/prop-types
-export default function Login(props) {
+export default function Login() {
   const navigate = useNavigate();
 
   const {
@@ -21,17 +24,14 @@ export default function Login(props) {
   const [toggle, setToggle] = useState(false);
   const onSubmit = async (data) => {
     try {
-      const response = await axiosInstance.post(Users_URLS.LOGIN, data);
+      const response = await apiInstance.post(users_endpoints.LOGIN, data);
       localStorage.setItem("token", response.data.token);
-      // eslint-disable-next-line react/prop-types
-      props.saveLoginData();
       navigate("/dashboard");
-
       toast.success("Logged in successfully", {
         theme: "light",
       });
     } catch (error) {
-      toast.error(error.response.data.message, {
+      toast.error(error?.response?.data?.message, {
         theme: "light",
       });
     }

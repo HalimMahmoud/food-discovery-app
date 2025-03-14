@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-import { axiosInstance, Users_URLS } from "../../service/utils";
-import { resetSehemaValidation } from "../../service/vaildators";
+import { resetSehemaValidation } from "../../services/vaildators";
+import { apiInstance } from "../../services/api/apiInstance";
+import { users_endpoints } from "../../services/api/apiConfig";
 export default function Reset() {
   const [toggle, setToggle] = useState(false);
   const [toggleConfirm, setToggleConfirm] = useState(false);
@@ -25,10 +26,7 @@ export default function Reset() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axiosInstance.post(
-        Users_URLS.RESET_PASSWORD,
-        data
-      );
+      const response = await apiInstance.post(users_endpoints.RESET, data);
       navigate("/");
 
       toast.success(response.data.message, {

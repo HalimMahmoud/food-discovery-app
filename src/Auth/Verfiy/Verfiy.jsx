@@ -2,8 +2,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axiosInstance, Users_URLS } from "../../service/utils";
-import { verifySchemaValidation } from "../../service/vaildators";
+import { verifySchemaValidation } from "../../services/vaildators";
+import { apiInstance } from "../../services/api/apiInstance";
+import { users_endpoints } from "../../services/api/apiConfig";
 export default function Verfiy() {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -21,10 +22,7 @@ export default function Verfiy() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axiosInstance.put(
-        Users_URLS.VERFIY_PASSWORD,
-        data
-      );
+      const response = await apiInstance.put(users_endpoints.VERIFY, data);
       navigate("/");
 
       toast.success(response.data.message, {

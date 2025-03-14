@@ -8,48 +8,29 @@ import Forget from "./Auth/Forget/Forget.jsx";
 import Dashboard from "./Dashboard/Dashboard.jsx";
 import MasterLayer from "./Shared/MasterLayout/MasterLayer.jsx";
 import NotFound from "./Shared/NotFound/NotFound.jsx";
-import ReciepesList from "./Recipes/ReciepesList/ReciepesList.jsx";
 import ReciepeData from "./Recipes/RecipeData/RecipeData.jsx";
 import CategoryData from "./Categories/CategoryData/CategoryData.jsx";
 import CategoriesList from "./Categories/CategoriesList/CategoriesList.jsx";
 import UsersList from "./Users/UsersList.jsx";
 import { ToastContainer } from "react-toastify";
-import { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
+
 import ProtectedRoute from "./Shared/ProtectedRoute/ProtectedRoute.jsx";
+import RecipesList from "./Recipes/RecipesList/RecipesList.jsx";
 
 function App() {
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      saveLoginData();
-    }
-  }, []);
-  const [loginData, setLoginData] = useState(null);
-
-  const saveLoginData = () => {
-    const token = localStorage.getItem("token");
-
-    const decodedToken = jwtDecode(token);
-    setLoginData(decodedToken);
-  };
-
-  const removeLoginData = () => {
-    setLoginData(null);
-  };
-
   const routes = createBrowserRouter([
     {
       path: "",
-      element: <AuthLayer loginData={loginData} />,
+      element: <AuthLayer />,
       errorElement: <NotFound />,
       children: [
         {
           index: true,
-          element: <Login saveLoginData={saveLoginData} />,
+          element: <Login />,
         },
         {
           path: "login",
-          element: <Login saveLoginData={saveLoginData} />,
+          element: <Login />,
         },
         {
           path: "register",
@@ -72,11 +53,8 @@ function App() {
     {
       path: "dashboard",
       element: (
-        <ProtectedRoute loginData={loginData}>
-          <MasterLayer
-            loginData={loginData}
-            removeLoginData={removeLoginData}
-          />
+        <ProtectedRoute>
+          <MasterLayer />
         </ProtectedRoute>
       ),
       errorElement: <NotFound />,
@@ -88,7 +66,7 @@ function App() {
         },
         {
           path: "recipes",
-          element: <ReciepesList />,
+          element: <RecipesList />,
         },
         {
           path: "recipe-data",

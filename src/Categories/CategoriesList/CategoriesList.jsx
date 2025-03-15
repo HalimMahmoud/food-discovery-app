@@ -1,19 +1,65 @@
-import { useCategory } from "../../Hooks/useCategory";
+import { useEffect, useState } from "react";
 import Header from "../../Shared/Header/Header";
-import DeleteConfirmation from "../../Shared/Model/Model";
+import AddEditCategory from "../../Shared/Model/AddEditCategory";
+import AddCategory from "../../Shared/Model/AddEditCategory";
+import { priveteApiInstance } from "../../services/api/apiInstance";
+import { categories_endpoints } from "../../services/api/apiConfig";
+import { toast } from "react-toastify";
+import DeleteConfirmation from "../../Shared/Model/DeleteConfirmation";
+// import DeleteConfirmation from "../../Shared/Model/DeleteConfirmation";
 
 export default function CategoriesList() {
-  const {
-    categoriesList,
-    handleShow,
-    handleClose,
-    handleCloseAndDelete,
-    showModal,
-    selectedId,
-  } = useCategory();
+  // handle fetch logic
+  const [categoriesList, setCategoriesList] = useState([]);
+
+  const getAllCategories = async () => {
+    try {
+      const response = await priveteApiInstance.get(
+        categories_endpoints.GET_ALL_CATEGORIES(10, 1)
+      );
+      setCategoriesList([...response.data.data]);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
+  // handle delete category logic
+  const deleteCategory = async (selectedId) => {
+    try {
+      await priveteApiInstance.delete(
+        categories_endpoints.DELETE_CATEGORY(selectedId)
+      );
+      toast.success("Item is deleted successfully");
+      getAllCategories();
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+  // confirmation model before delete
+  const [showModal, setShowModal] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
+  const handleShow = (id) => {
+    setShowModal(true);
+    setSelectedId(id);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+    setSelectedId(null);
+  };
+
+  const handleCloseAndDelete = (id) => {
+    handleClose();
+    deleteCategory(id);
+  };
 
   return (
-    <div className="h-100">
+    <div>
       <Header
         title="Categories"
         tag="Items"
@@ -25,7 +71,8 @@ export default function CategoriesList() {
           <h3>Categories Table Details</h3>
           <span>You can check details</span>
         </div>
-        <button className="btn btn-success my-auto">Add new Category</button>
+        {/* <button className="btn btn-success my-auto">Add new Category</button> */}
+        <AddCategory />
       </div>
       <table className="table table-striped table-hover">
         <thead>
@@ -56,10 +103,11 @@ export default function CategoriesList() {
                       </button>
                     </li>
                     <li>
-                      <button className="dropdown-item" type="button">
-                        <i className="fa fa-edit text-success m-2"></i>
-                        Edit
-                      </button>
+                      <AddEditCategory
+                        selectedId={category.id}
+                        categoryName={category.name}
+                        getAllCategories={() => getAllCategories()}
+                      />
                     </li>
                     <li>
                       <button

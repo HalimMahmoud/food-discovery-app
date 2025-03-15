@@ -26,7 +26,7 @@ export default function DeleteConfirmation({
       </Modal.Body>
       <Modal.Footer>
         <Button variant="outline-danger" onClick={handleCloseAndDelete}>
-          Delete this item
+          Delete this {item}
         </Button>
       </Modal.Footer>
     </Modal>

@@ -13,8 +13,9 @@ export const users_endpoints = {
 export const categories_endpoints = {
   GET_ALL_CATEGORIES: (pageSize, pageNumber) =>
     `/Category/?pageSize=${pageSize}&pageNumber=${pageNumber}`,
-
+  UPDATE_CATEGORY: (id) => `/Category/${id}`,
   DELETE_CATEGORY: (id) => `/Category/${id}`,
+  ADD_CATEGORY: `/Category/`,
 };
 
 export const recipes_endpoints = {

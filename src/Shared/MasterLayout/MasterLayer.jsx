@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
-import SideBar from "../Sidebar/Sidebar";
+import SideBar from "../SideBar/SideBar";
 import { useLoginData } from "../../Hooks/useLoginData";
 
 // eslint-disable-next-line react/prop-types
@@ -9,7 +9,7 @@ export default function MasterLayer() {
   const { loginData, removeLoginData } = useLoginData();
 
   return (
-    <div className="d-flex vh-100">
+    <div className="d-flex">
       <div className="">
         <SideBar removeLoginData={removeLoginData} />
       </div>

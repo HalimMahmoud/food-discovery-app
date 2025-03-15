@@ -1,3 +1,7 @@
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
 .layout {
   background-image: url(/src/assets/ella-olsson-C1Q3qOTlegg-unsplash\ 1.png);
   background-position: center center;

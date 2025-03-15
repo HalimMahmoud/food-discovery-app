@@ -1,7 +1,7 @@
 import { useReceipe } from "../../Hooks/useReceipe";
 import { imageURL } from "../../services/api/apiConfig";
 import Header from "../../Shared/Header/Header";
-import DeleteConfirmation from "../../Shared/Model/Model";
+import DeleteConfirmation from "../../Shared/Model/DeleteConfirmation";
 
 export default function RecipesList() {
   const {
@@ -14,7 +14,7 @@ export default function RecipesList() {
   } = useReceipe();
 
   return (
-    <div className="h-100">
+    <div className="">
       <Header
         title="Recipes"
         tag="Items"
@@ -50,10 +50,10 @@ export default function RecipesList() {
               <td>
                 <img src={imageURL + recipe.imagePath} width="200px" />
               </td>
-              <td>{recipe.description}</td>
               <td>{recipe.price}</td>
+              <td>{recipe.description}</td>
               <td>{recipe.tag.name}</td>
-              <td>{recipe.category.map((category) => `${category.name} ,`)}</td>
+              <td>{recipe.category.map((category) => `${category.name}, `)}</td>
               <td>
                 <div className="dropdown">
                   <i

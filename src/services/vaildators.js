@@ -58,3 +58,9 @@ export const registerSehemaValidation = Yup.object().shape({
   password: newPassword,
   confirmPassword: newConfirmPassword,
 });
+
+export const add_editCategorySehemaValidation = Yup.object().shape({
+  name: Yup.string()
+    .required("Categroy name is required")
+    .min(2, "Categroy length shoud be at least 2 characters"),
+});

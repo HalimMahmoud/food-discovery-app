@@ -11,8 +11,10 @@ import { priveteApiInstance } from "../../services/api/apiInstance";
 import { toast } from "react-toastify";
 import Pagination from "../../Shared/Pagination/Pagination";
 import NoData from "../../Shared/NoData/NoData";
+import { useNavigate } from "react-router-dom";
 
 export default function RecipesList() {
+  const navigate = useNavigate();
   // handle fetch logic
   const [recipesList, setRecipesList] = useState([]);
   const [tags, setTags] = useState([]);
@@ -143,7 +145,12 @@ export default function RecipesList() {
           <h3>Recipes Table Details</h3>
           <span>You can check details</span>
         </div>
-        <button className="btn btn-success my-auto">Add new Recipe</button>
+        <button
+          className="btn btn-success my-auto"
+          onClick={() => navigate("new")}
+        >
+          Add new Recipe
+        </button>
       </div>
 
       <div className="container-fluid">
@@ -256,7 +263,11 @@ export default function RecipesList() {
                           </button>
                         </li>
                         <li>
-                          <button className="dropdown-item" type="button">
+                          <button
+                            className="dropdown-item"
+                            type="button"
+                            onClick={() => navigate(`${recipe.id}/edit`)}
+                          >
                             <i className="fa fa-edit text-success m-2"></i>
                             Edit
                           </button>

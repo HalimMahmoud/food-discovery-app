@@ -22,6 +22,7 @@ export const categories_endpoints = {
 
 export const recipes_endpoints = {
   GET_ALL_RECIPES: `/Recipe/`,
+  GET_RECIPE: (id) => `/Recipe/${id}`,
   DELETE_RECIPE: (id) => `/Recipe/${id}`,
   UPDATE_RECIPE: (id) => `/Recipe/${id}`,
   ADD_RECIPE: `/Recipe`,

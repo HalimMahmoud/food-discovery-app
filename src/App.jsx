@@ -9,7 +9,6 @@ import Dashboard from "./Dashboard/Dashboard.jsx";
 import MasterLayer from "./Shared/MasterLayout/MasterLayer.jsx";
 import NotFound from "./Shared/NotFound/NotFound.jsx";
 import ReciepeData from "./Recipes/RecipeData/RecipeData.jsx";
-import CategoryData from "./Categories/CategoryData/CategoryData.jsx";
 import CategoriesList from "./Categories/CategoriesList/CategoriesList.jsx";
 import UsersList from "./Users/UserList/UsersList.jsx";
 import { ToastContainer } from "react-toastify";
@@ -69,16 +68,16 @@ function App() {
           element: <RecipesList />,
         },
         {
-          path: "recipe-data",
+          path: "recipes/new",
+          element: <ReciepeData />,
+        },
+        {
+          path: "recipes/:id/edit",
           element: <ReciepeData />,
         },
         {
           path: "categories",
           element: <CategoriesList />,
-        },
-        {
-          path: "category-data",
-          element: <CategoryData />,
         },
         {
           path: "users",

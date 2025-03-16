@@ -60,7 +60,7 @@ export const registerSehemaValidation = Yup.object().shape({
   confirmPassword: confirmNewPassword,
 });
 
-export const add_editCategorySehemaValidation = Yup.object().shape({
+export const categoryDataSehemaValidation = Yup.object().shape({
   name: Yup.string()
     .required("Categroy name is required")
     .min(2, "Categroy length shoud be at least 2 characters"),
@@ -72,4 +72,13 @@ export const changePasswordSehemaValidation = Yup.object().shape({
     .min(8, "Old password length is already set to be at least 8 characters"),
   newPassword: newPassword,
   confirmNewPassword: confirmNewPassword,
+});
+
+export const recipeDataSehemaValidation = Yup.object().shape({
+  name: Yup.string().required("Recipe name is required"),
+  description: Yup.string().required("Recipe description is required"),
+  price: Yup.number().required("Recipe price is required"),
+  recipeImage: Yup.string(),
+  categoryIds: Yup.number(),
+  tagId: Yup.number().required("Tag is required"),
 });

@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { add_editCategorySehemaValidation } from "../../services/vaildators";
+import { categoryDataSehemaValidation } from "../../services/vaildators";
 import { useState } from "react";
 import { categories_endpoints } from "../../services/api/apiConfig";
 import { priveteApiInstance } from "../../services/api/apiInstance";
@@ -24,7 +24,7 @@ export default function CategoryData({
   } = useForm({
     mode: "onChange",
     defaultValues: { name: categoryName },
-    resolver: yupResolver(add_editCategorySehemaValidation),
+    resolver: yupResolver(categoryDataSehemaValidation),
   });
 
   const onAddEdit = async (data) => {

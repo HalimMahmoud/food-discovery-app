@@ -8,19 +8,25 @@ export const users_endpoints = {
   RESET_REQUEST: `/Users/Reset/Request`,
   RESET: `/Users/Reset`,
   GET_USER: (id) => `/Users/${id}`,
+  GET_ALL_USERS: `/Users/`,
+  DELETE_USER: (id) => `/Users/${id}`,
+  CHANGE_PASSWORD: `/Users/ChangePassword`,
 };
 
 export const categories_endpoints = {
-  GET_ALL_CATEGORIES: (pageSize, pageNumber) =>
-    `/Category/?pageSize=${pageSize}&pageNumber=${pageNumber}`,
+  GET_ALL_CATEGORIES: `/Category/`,
   UPDATE_CATEGORY: (id) => `/Category/${id}`,
   DELETE_CATEGORY: (id) => `/Category/${id}`,
-  ADD_CATEGORY: `/Category/`,
+  ADD_CATEGORY: `/Category`,
 };
 
 export const recipes_endpoints = {
-  GET_ALL_RECIPES: (pageSize, pageNumber) =>
-    `/Recipe/?pageSize=${pageSize}&pageNumber=${pageNumber}`,
-
+  GET_ALL_RECIPES: `/Recipe/`,
   DELETE_RECIPE: (id) => `/Recipe/${id}`,
+  UPDATE_RECIPE: (id) => `/Recipe/${id}`,
+  ADD_RECIPE: `/Recipe`,
+};
+
+export const tags_endpoints = {
+  GET_ALL_TAGS: `/Tag/`,
 };

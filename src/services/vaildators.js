@@ -13,10 +13,11 @@ const newPassword = Yup.string()
   )
   .required("Password is required")
   .min(8, "Password length should be at least 8 characters");
-const newConfirmPassword = Yup.string()
+const confirmNewPassword = Yup.string()
   .required("Confirm Password is required")
   .min(8, "Password length should be at least 8 characters")
-  .oneOf([Yup.ref("password")], "Passwords do not match");
+  .oneOf([Yup.ref("password")], "Passwords do not match")
+  .oneOf([Yup.ref("newPassword")], "Passwords do not match");
 
 // validation schemas
 export const verifySchemaValidation = Yup.object().shape({
@@ -28,7 +29,7 @@ export const resetSehemaValidation = Yup.object().shape({
   email,
   seed: otp,
   password: newPassword,
-  confirmPassword: newConfirmPassword,
+  confirmPassword: confirmNewPassword,
 });
 export const forgetSehemaValidation = Yup.object().shape({
   email,
@@ -56,11 +57,19 @@ export const registerSehemaValidation = Yup.object().shape({
     .required("Phone number is required")
     .matches(/^01[0125][0-9]{8}$/, "Invalid phone number"),
   password: newPassword,
-  confirmPassword: newConfirmPassword,
+  confirmPassword: confirmNewPassword,
 });
 
 export const add_editCategorySehemaValidation = Yup.object().shape({
   name: Yup.string()
     .required("Categroy name is required")
     .min(2, "Categroy length shoud be at least 2 characters"),
+});
+
+export const changePasswordSehemaValidation = Yup.object().shape({
+  oldPassword: Yup.string()
+    .required("Old password is required")
+    .min(8, "Old password length is already set to be at least 8 characters"),
+  newPassword: newPassword,
+  confirmNewPassword: confirmNewPassword,
 });

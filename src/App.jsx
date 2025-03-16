@@ -11,7 +11,7 @@ import NotFound from "./Shared/NotFound/NotFound.jsx";
 import ReciepeData from "./Recipes/RecipeData/RecipeData.jsx";
 import CategoryData from "./Categories/CategoryData/CategoryData.jsx";
 import CategoriesList from "./Categories/CategoriesList/CategoriesList.jsx";
-import UsersList from "./Users/UsersList.jsx";
+import UsersList from "./Users/UserList/UsersList.jsx";
 import { ToastContainer } from "react-toastify";
 
 import ProtectedRoute from "./Shared/ProtectedRoute/ProtectedRoute.jsx";

@@ -9,11 +9,11 @@ export default function MasterLayer() {
   const { loginData, removeLoginData } = useLoginData();
 
   return (
-    <div className="d-flex">
-      <div className="">
+    <div className="d-flex ms-layer">
+      <div className="align-self-stretch bg-fix">
         <SideBar removeLoginData={removeLoginData} />
       </div>
-      <div className="w-100 m-2">
+      <div className="w-100 m-3 align-self-stretch">
         <Navbar loginData={loginData} />
         <Outlet />
       </div>

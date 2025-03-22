@@ -31,3 +31,9 @@ export const recipes_endpoints = {
 export const tags_endpoints = {
   GET_ALL_TAGS: `/Tag/`,
 };
+
+export const favs_endpoints = {
+  GET_ALL_FAVS: `/userRecipe/`,
+  ADD_FAV: `/userRecipe/`,
+  DELET_FAV: (id) => `/userRecipe/${id}`,
+};

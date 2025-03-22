@@ -12,6 +12,8 @@ const AuthProvider = ({ children }) => {
       : null
   );
 
+  // const [token, setToken] = useState(null);
+
   const login = () => {
     const token = localStorage.getItem("token");
     const decodedToken = jwtDecode(token);
@@ -22,11 +24,14 @@ const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem("token");
   };
+
   useEffect(() => {
     const handleStorageChange = () => {
       if (!localStorage.getItem("token")) {
         logout();
       }
+
+      login();
     };
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);

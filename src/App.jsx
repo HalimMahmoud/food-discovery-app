@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./Shared/ProtectedRoute/ProtectedRoute.jsx";
 import RecipesList from "./Recipes/RecipesList/RecipesList.jsx";
 import AuthProvider from "./Contexts/AuthContext.jsx";
+import FavoriteList from "./FavoriteList/FavoriteList.jsx";
 
 function App() {
   const routes = createBrowserRouter([
@@ -79,6 +80,10 @@ function App() {
         {
           path: "categories",
           element: <CategoriesList />,
+        },
+        {
+          path: "favorites",
+          element: <FavoriteList />,
         },
         {
           path: "users",

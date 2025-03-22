@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   categories_endpoints,
+  favs_endpoints,
   imageURL,
   recipes_endpoints,
   tags_endpoints,
@@ -13,6 +14,8 @@ import Pagination from "../../Shared/Pagination/Pagination";
 import NoData from "../../Shared/NoData/NoData";
 import { useNavigate } from "react-router-dom";
 
+import { useContext } from "react";
+import { AuthContext } from "../../Contexts/AuthContext";
 export default function RecipesList() {
   const navigate = useNavigate();
   // handle fetch logic
@@ -131,7 +134,18 @@ export default function RecipesList() {
     });
   };
 
+  const addToFav = async (id) => {
+    try {
+      await priveteApiInstance.post(favs_endpoints.ADD_FAV, { recipeId: id });
+
+      toast.success("Item is added to favorite successfully");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
   const [arrayOfPages, setArrayOfPages] = useState([]);
+
+  const { isAdmin } = useContext(AuthContext);
 
   return (
     <div className="">
@@ -248,42 +262,49 @@ export default function RecipesList() {
                     {recipe.category.map((category) => `${category.name}, `)}
                   </td>
                   <td>
-                    <div className="dropdown">
+                    {isAdmin ? (
+                      <div className="dropdown">
+                        <i
+                          className="fa fa-ellipsis text-success m-2"
+                          data-bs-offset="-20,0"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        ></i>
+                        <ul className="dropdown-menu">
+                          <li>
+                            <button className="dropdown-item" type="button">
+                              <i className="fa fa-eye text-success m-2"></i>
+                              View
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="dropdown-item"
+                              type="button"
+                              onClick={() => navigate(`${recipe.id}/edit`)}
+                            >
+                              <i className="fa fa-edit text-success m-2"></i>
+                              Edit
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="dropdown-item"
+                              onClick={() => handleShow(recipe.id)}
+                              type="button"
+                            >
+                              <i className="fa fa-trash text-success m-2"></i>
+                              Delete
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    ) : (
                       <i
-                        className="fa fa-ellipsis text-success m-2"
-                        data-bs-offset="-20,0"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      ></i>
-                      <ul className="dropdown-menu">
-                        <li>
-                          <button className="dropdown-item" type="button">
-                            <i className="fa fa-eye text-success m-2"></i>
-                            View
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className="dropdown-item"
-                            type="button"
-                            onClick={() => navigate(`${recipe.id}/edit`)}
-                          >
-                            <i className="fa fa-edit text-success m-2"></i>
-                            Edit
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className="dropdown-item"
-                            onClick={() => handleShow(recipe.id)}
-                            type="button"
-                          >
-                            <i className="fa fa-trash text-success m-2"></i>
-                            Delete
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
+                        className="fa fa-heart text-success addtofav"
+                        onClick={() => addToFav(recipe.id)}
+                      />
+                    )}
                   </td>
                 </tr>
               ))

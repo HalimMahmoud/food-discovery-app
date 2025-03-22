@@ -30,8 +30,6 @@ const AuthProvider = ({ children }) => {
       if (!localStorage.getItem("token")) {
         logout();
       }
-
-      login();
     };
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);

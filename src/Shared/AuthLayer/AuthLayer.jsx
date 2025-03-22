@@ -1,11 +1,12 @@
 import { Outlet, Navigate } from "react-router-dom";
 import Logo from "../../assets/4 3.png";
-import { useLoginData } from "../../Hooks/useLoginData";
 
+import { useContext } from "react";
+import { AuthContext } from "../../Contexts/AuthContext";
 // eslint-disable-next-line react/prop-types
 export default function AuthLayer() {
-  const { loginData } = useLoginData();
-  if (localStorage.getItem("token") || loginData) {
+  const { user } = useContext(AuthContext);
+  if (localStorage.getItem("token") || user) {
     return <Navigate to="/dashboard" />;
   }
 

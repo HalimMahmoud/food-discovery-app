@@ -4,8 +4,13 @@ import logo from "../../assets/3.png";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import ChangePassword from "../../Auth/ChangePassword/ChangePassword";
-// eslint-disable-next-line react/prop-types
-export default function SideBar({ removeLoginData }) {
+
+import { useContext } from "react";
+import { AuthContext } from "../../Contexts/AuthContext";
+export default function SideBar() {
+  const { logout, isAdmin } = useContext(AuthContext);
+
+  console.log(isAdmin);
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleCollapse = () => {
@@ -17,7 +22,7 @@ export default function SideBar({ removeLoginData }) {
   // console.log(location.pathname);
   const handleLogout = () => {
     localStorage.removeItem("token");
-    removeLoginData();
+    logout();
 
     toast.success("Logged out successfully", {
       theme: "light",
@@ -50,31 +55,43 @@ export default function SideBar({ removeLoginData }) {
         >
           Home
         </MenuItem>
-        <MenuItem
-          icon={<i className="fa fa-users"></i>}
-          component={<Link to="users" />}
-        >
-          Users
-        </MenuItem>
+        {isAdmin && (
+          <MenuItem
+            icon={<i className="fa fa-users"></i>}
+            component={<Link to="users" />}
+          >
+            Users
+          </MenuItem>
+        )}
         <MenuItem
           icon={<i className="fa fa-bell-concierge"></i>}
           component={<Link to="recipes" />}
         >
           Recipes
         </MenuItem>
-        <MenuItem
-          icon={<i className="fa fa-list"></i>}
-          component={<Link to="categories" />}
-        >
-          Categories
-        </MenuItem>
-        {/* <MenuItem icon={<i className="fa fa-unlock"></i>}>
-          Change Passowrd
-        </MenuItem> */}
+
+        {isAdmin && (
+          <MenuItem
+            icon={<i className="fa fa-list"></i>}
+            component={<Link to="categories" />}
+          >
+            Categories
+          </MenuItem>
+        )}
+
+        {!isAdmin && (
+          <MenuItem
+            icon={<i className="fa fa-heart"></i>}
+            component={<Link to="favorites" />}
+          >
+            Favorites
+          </MenuItem>
+        )}
+
         <ChangePassword />
         <MenuItem
           onClick={handleLogout}
-          icon={<i className="fa fa-right-from-bracket"></i>}
+          icon={<i className="fa fa-right-from-bracket" />}
         >
           Logout
         </MenuItem>

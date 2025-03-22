@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useLoginData } from "../Hooks/useLoginData";
 import Header from "../Shared/Header/Header";
+import { useContext } from "react";
+import { AuthContext } from "../Contexts/AuthContext";
 
 export default function Dashboard() {
-  const { loginData } = useLoginData();
+  const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -15,7 +16,7 @@ export default function Dashboard() {
       <Header
         title="Welcome"
         welcomeHeader={true}
-        tag={loginData?.userName}
+        tag={user?.userName}
         description="This is a welcoming screen for the entry of the application , you can now see the options"
       />
 

@@ -1,5 +1,9 @@
-/* eslint-disable react/prop-types */
-export default function Navbar({ loginData }) {
+import { useContext } from "react";
+import { AuthContext } from "../../Contexts/AuthContext";
+
+export default function Navbar() {
+  const { user } = useContext(AuthContext);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <button
@@ -18,7 +22,7 @@ export default function Navbar({ loginData }) {
         <ul className="navbar-nav ms-auto ">
           <li className="nav-item active">
             <a className="nav-link" href="#">
-              {loginData?.userEmail}
+              {user?.userName}
             </a>
           </li>
         </ul>

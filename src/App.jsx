@@ -6,7 +6,7 @@ import Verfiy from "./Auth/Verfiy/Verfiy.jsx";
 import Reset from "./Auth/Reset/Reset.jsx";
 import Forget from "./Auth/Forget/Forget.jsx";
 import Dashboard from "./Dashboard/Dashboard.jsx";
-import MasterLayer from "./Shared/MasterLayout/MasterLayer.jsx";
+import MasterLayer from "./Shared/MasterLayer/MasterLayer.jsx";
 import NotFound from "./Shared/NotFound/NotFound.jsx";
 import ReciepeData from "./Recipes/RecipeData/RecipeData.jsx";
 import CategoriesList from "./Categories/CategoriesList/CategoriesList.jsx";
@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 
 import ProtectedRoute from "./Shared/ProtectedRoute/ProtectedRoute.jsx";
 import RecipesList from "./Recipes/RecipesList/RecipesList.jsx";
+import AuthProvider from "./Contexts/AuthContext.jsx";
 
 function App() {
   const routes = createBrowserRouter([
@@ -87,10 +88,10 @@ function App() {
     },
   ]);
   return (
-    <>
+    <AuthProvider>
       <RouterProvider router={routes} />
       <ToastContainer />
-    </>
+    </AuthProvider>
   );
 }
 

@@ -35,6 +35,7 @@ export default function RecipeData() {
     if (params.id) {
       getRecipeData(params.id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
   const {
     register,

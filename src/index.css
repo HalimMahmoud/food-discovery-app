@@ -109,8 +109,6 @@ input {
   border-left: 3px solid rgba(0, 146, 71, 1) !important;
 }
 
-.addtofav:hover {
-}
 .fa-spinner {
   animation: rotateSpinner 800ms linear infinite;
 }

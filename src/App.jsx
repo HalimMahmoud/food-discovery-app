@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import AuthLayer from "./Shared/AuthLayer/AuthLayer.jsx";
 import Login from "./Auth/Login/Login.jsx";
 import Register from "./Auth/Register/Register.jsx";
@@ -19,7 +19,7 @@ import AuthProvider from "./Contexts/AuthContext.jsx";
 import FavoriteList from "./FavoriteList/FavoriteList.jsx";
 
 function App() {
-  const routes = createBrowserRouter([
+  const routes = createHashRouter([
     {
       path: "",
       element: <AuthLayer />,

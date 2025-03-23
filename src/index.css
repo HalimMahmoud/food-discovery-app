@@ -5,7 +5,7 @@ html,
   min-height: 100%;
 }
 .layout {
-  background-image: url(/src/assets/ella-olsson-C1Q3qOTlegg-unsplash\ 1.png);
+  background-image: url(../src/assets/ella-olsson-C1Q3qOTlegg-unsplash\ 1.png);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;

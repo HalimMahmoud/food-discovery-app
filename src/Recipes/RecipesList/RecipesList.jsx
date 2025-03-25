@@ -6,9 +6,12 @@ import {
   recipes_endpoints,
   tags_endpoints,
 } from "../../services/api/apiConfig";
+
+import NoDataImg from "../../assets/Group 48102290.png";
+
 import Header from "../../Shared/Header/Header";
 import DeleteConfirmation from "../../Shared/Modal/DeleteConfirmation";
-import { priveteApiInstance } from "../../services/api/apiInstance";
+import { privateApiInstance } from "../../services/api/apiInstance";
 import { toast } from "react-toastify";
 import Pagination from "../../Shared/Pagination/Pagination";
 import NoData from "../../Shared/NoData/NoData";
@@ -33,7 +36,7 @@ export default function RecipesList() {
   });
   const getAllCategories = async () => {
     try {
-      const response = await priveteApiInstance.get(
+      const response = await privateApiInstance.get(
         categories_endpoints.GET_ALL_CATEGORIES
       );
 
@@ -45,7 +48,7 @@ export default function RecipesList() {
 
   const getAllTags = async () => {
     try {
-      const response = await priveteApiInstance.get(
+      const response = await privateApiInstance.get(
         tags_endpoints.GET_ALL_TAGS
       );
       setTags(response?.data);
@@ -61,7 +64,7 @@ export default function RecipesList() {
     categoryId
   ) => {
     try {
-      const response = await priveteApiInstance.get(
+      const response = await privateApiInstance.get(
         recipes_endpoints.GET_ALL_RECIPES,
         {
           params: {
@@ -97,7 +100,7 @@ export default function RecipesList() {
   // handle delete category logic
   const deleteRecipe = async (selectedId) => {
     try {
-      await priveteApiInstance.delete(
+      await privateApiInstance.delete(
         recipes_endpoints.DELETE_RECIPE(selectedId)
       );
       toast.success("Item is deleted successfully");
@@ -136,7 +139,7 @@ export default function RecipesList() {
 
   const addToFav = async (id) => {
     try {
-      await priveteApiInstance.post(favs_endpoints.ADD_FAV, { recipeId: id });
+      await privateApiInstance.post(favs_endpoints.ADD_FAV, { recipeId: id });
 
       toast.success("Item is added to favorite successfully");
     } catch (error) {
@@ -253,7 +256,14 @@ export default function RecipesList() {
                 <tr key={recipe.id}>
                   <td>{recipe.name}</td>
                   <td>
-                    <img src={imageURL + recipe.imagePath} width="200px" />
+                    <img
+                      src={
+                        recipe.imagePath
+                          ? imageURL + recipe.imagePath
+                          : NoDataImg
+                      }
+                      width="200px"
+                    />
                   </td>
                   <td>{recipe.price} $</td>
                   <td>{recipe.description}</td>

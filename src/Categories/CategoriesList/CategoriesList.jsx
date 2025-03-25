@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../../Shared/Header/Header";
 // import AddEditCategory from "../../Shared/Modal/AddEditCategory";
 // import AddCategory from "../../Shared/Modal/AddEditCategory";
-import { priveteApiInstance } from "../../services/api/apiInstance";
+import { privateApiInstance } from "../../services/api/apiInstance";
 import { categories_endpoints } from "../../services/api/apiConfig";
 import { toast } from "react-toastify";
 import DeleteConfirmation from "../../Shared/Modal/DeleteConfirmation";
@@ -24,7 +24,7 @@ export default function CategoriesList() {
   });
   const getAllCategories = async (pageSize, pageNumber, name) => {
     try {
-      const response = await priveteApiInstance.get(
+      const response = await privateApiInstance.get(
         categories_endpoints.GET_ALL_CATEGORIES,
         {
           params: {
@@ -55,7 +55,7 @@ export default function CategoriesList() {
   // handle delete category logic
   const deleteCategory = async (selectedId) => {
     try {
-      await priveteApiInstance.delete(
+      await privateApiInstance.delete(
         categories_endpoints.DELETE_CATEGORY(selectedId)
       );
       toast.success("Item is deleted successfully");

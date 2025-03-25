@@ -7,10 +7,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSehemaValidation } from "../../services/vaildators";
 import { apiInstance } from "../../services/api/apiInstance";
 import { users_endpoints } from "../../services/api/apiConfig";
+import { useContext } from "react";
+import { AuthContext } from "../../Contexts/AuthContext";
 
-// eslint-disable-next-line react/prop-types
 export default function Login() {
   const navigate = useNavigate();
+
+  const { setToken } = useContext(AuthContext);
 
   const {
     register,
@@ -22,10 +25,12 @@ export default function Login() {
   });
 
   const [toggle, setToggle] = useState(false);
+
   const onSubmit = async (data) => {
     try {
       const response = await apiInstance.post(users_endpoints.LOGIN, data);
       localStorage.setItem("token", response.data.token);
+      setToken(response.data.token);
       navigate("/dashboard");
       toast.success("Logged in successfully", {
         theme: "light",
@@ -105,7 +110,13 @@ export default function Login() {
           className="btn btn-success w-100"
           disabled={isSubmitting}
         >
-          {isSubmitting ? <i className="fa fa-spinner"></i> : "Login"}
+          {isSubmitting ? (
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : (
+            "Login"
+          )}
         </button>
       </form>
     </div>

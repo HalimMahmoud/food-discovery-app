@@ -1,18 +1,18 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { changePasswordSehemaValidation } from "../../services/vaildators";
 import { useEffect, useState } from "react";
 import { users_endpoints } from "../../services/api/apiConfig";
-import { priveteApiInstance } from "../../services/api/apiInstance";
+import { privateApiInstance } from "../../services/api/apiInstance";
 import { toast } from "react-toastify";
 
 import Logo from "../../assets/4 3.png";
 import { MenuItem } from "react-pro-sidebar";
 
-export default function ChangePassword() {
+// eslint-disable-next-line react/prop-types
+export default function ChangePassword({ SidebarItem }) {
   const [showModal, setShowModal] = useState(false);
 
   const [oldPasswordToggle, setOldPasswordToggle] = useState(false);
@@ -44,7 +44,7 @@ export default function ChangePassword() {
     handleClose();
 
     try {
-      const response = await priveteApiInstance.put(
+      const response = await privateApiInstance.put(
         users_endpoints.CHANGE_PASSWORD,
         data
       );
@@ -66,10 +66,15 @@ export default function ChangePassword() {
 
   return (
     <>
-      <MenuItem onClick={handleShow} icon={<i className="fa fa-unlock"></i>}>
-        Change Password
-      </MenuItem>
-
+      {SidebarItem ? (
+        <MenuItem onClick={handleShow} icon={<i className="fa fa-unlock"></i>}>
+          Change Password
+        </MenuItem>
+      ) : (
+        <button className="dropdown-item" type="button" onClick={handleShow}>
+          Change Password
+        </button>
+      )}
       <Modal show={showModal} onHide={handleClose}>
         <i
           className="fa-regular fa-circle-xmark close-icon text-danger"

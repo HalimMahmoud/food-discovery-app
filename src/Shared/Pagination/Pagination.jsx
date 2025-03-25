@@ -11,7 +11,6 @@ export default function Pagination({
           <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
             <a
               className="page-link"
-              href="#"
               aria-label="Previous"
               onClick={() =>
                 changeCurrentPage((prev) => (prev === 1 ? prev : prev - 1))
@@ -30,7 +29,6 @@ export default function Pagination({
             >
               <a
                 className="page-link"
-                href="#"
                 onClick={() => changeCurrentPage(pageNumber)}
               >
                 {pageNumber}
@@ -45,7 +43,6 @@ export default function Pagination({
           >
             <a
               className="page-link"
-              href="#"
               aria-label="Next"
               onClick={() =>
                 changeCurrentPage((prev) =>

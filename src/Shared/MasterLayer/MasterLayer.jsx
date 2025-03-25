@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
-import SideBar from "../Sidebar/Sidebar";
+import SideBar from "../SideBar/SideBar";
 
 export default function MasterLayer() {
   return (

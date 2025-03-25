@@ -19,6 +19,20 @@ const confirmNewPassword = Yup.string()
   .oneOf([Yup.ref("password")], "Passwords do not match")
   .oneOf([Yup.ref("newPassword")], "Passwords do not match");
 
+const country = Yup.string()
+  .required("Country name is required")
+  .min(4, "Country name length should be at least 4 characters");
+const phoneNumber = Yup.string()
+  .required("Phone number is required")
+  .matches(/^01[0125][0-9]{8}$/, "Invalid phone number");
+
+const userName = Yup.string()
+  .required("Username is required")
+  .min(4, "Username length should be at least 4 characters")
+  .matches(
+    /^[A-Za-z]*\d+/,
+    "Username must contain characters and end with numbers without spaces"
+  );
 // validation schemas
 export const verifySchemaValidation = Yup.object().shape({
   email,
@@ -42,20 +56,10 @@ export const loginSehemaValidation = Yup.object().shape({
 });
 
 export const registerSehemaValidation = Yup.object().shape({
-  userName: Yup.string()
-    .required("Username is required")
-    .min(4, "Username length should be at least 4 characters")
-    .matches(
-      /^[A-Za-z]*\d+/,
-      "Username must contain characters and end with numbers without spaces"
-    ),
+  userName,
   email,
-  country: Yup.string()
-    .required("Country name is required")
-    .min(4, "Country name length should be at least 4 characters"),
-  phoneNumber: Yup.string()
-    .required("Phone number is required")
-    .matches(/^01[0125][0-9]{8}$/, "Invalid phone number"),
+  country,
+  phoneNumber,
   password: newPassword,
   confirmPassword: confirmNewPassword,
 });
@@ -81,4 +85,13 @@ export const recipeDataSehemaValidation = Yup.object().shape({
   recipeImage: Yup.string(),
   categoryIds: Yup.number(),
   tagId: Yup.number().required("Tag is required"),
+});
+
+export const editProfileSehemaValidation = Yup.object().shape({
+  userName,
+  email,
+  country,
+  phoneNumber,
+  profileImage: Yup.string(),
+  confirmPassword: newPassword,
 });

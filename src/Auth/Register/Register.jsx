@@ -225,7 +225,13 @@ export default function Register() {
           className="btn btn-success w-50 m-auto"
           disabled={isSubmitting}
         >
-          {isSubmitting ? <i className="fa fa-spinner"></i> : "Register"}
+          {isSubmitting ? (
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : (
+            "Register"
+          )}
         </button>
       </form>
     </div>

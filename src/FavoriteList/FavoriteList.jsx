@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import Header from "../Shared/Header/Header";
 import { favs_endpoints, imageURL } from "../services/api/apiConfig";
-import { priveteApiInstance } from "../services/api/apiInstance";
+import { privateApiInstance } from "../services/api/apiInstance";
 import { toast } from "react-toastify";
 import NoData from "../Shared/NoData/NoData";
 import DeleteConfirmation from "../Shared/Modal/DeleteConfirmation";
+import NoDataImg from "../assets/Group 48102290.png";
 
 export default function FavoriteList() {
   const [userRecipes, setUserRecipes] = useState([]);
 
   const getAllUserFavorites = async () => {
     try {
-      const response = await priveteApiInstance.get(
+      const response = await privateApiInstance.get(
         favs_endpoints.GET_ALL_FAVS
       );
       setUserRecipes(response.data.data);
@@ -44,7 +45,7 @@ export default function FavoriteList() {
 
   const deleteUserRecipe = async (selectedId) => {
     try {
-      await priveteApiInstance.delete(favs_endpoints.DELET_FAV(selectedId));
+      await privateApiInstance.delete(favs_endpoints.DELET_FAV(selectedId));
       toast.success("Item is deleted successfully");
       getAllUserFavorites();
     } catch (error) {
@@ -72,7 +73,11 @@ export default function FavoriteList() {
                 >
                   <img
                     className="w-100"
-                    src={`${imageURL}/${userRecipe.recipe.imagePath}`}
+                    src={
+                      userRecipe.recipe.imagePath
+                        ? imageURL + userRecipe.recipe.imagePath
+                        : NoDataImg
+                    }
                   />
                   <h3>{userRecipe.recipe.name}</h3>
                   <p>{userRecipe.recipe.description}</p>

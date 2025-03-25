@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { categoryDataSehemaValidation } from "../../services/vaildators";
 import { useState } from "react";
 import { categories_endpoints } from "../../services/api/apiConfig";
-import { priveteApiInstance } from "../../services/api/apiInstance";
+import { privateApiInstance } from "../../services/api/apiInstance";
 import { toast } from "react-toastify";
 
 export default function CategoryData({
@@ -32,13 +32,13 @@ export default function CategoryData({
 
     try {
       if (selectedId && categoryName) {
-        await priveteApiInstance.put(
+        await privateApiInstance.put(
           categories_endpoints.UPDATE_CATEGORY(selectedId),
           data
         );
         toast.success("Category is edited successfully");
       } else {
-        await priveteApiInstance.post(categories_endpoints.ADD_CATEGORY, data);
+        await privateApiInstance.post(categories_endpoints.ADD_CATEGORY, data);
         toast.success("Category is added successfully");
       }
     } catch (error) {

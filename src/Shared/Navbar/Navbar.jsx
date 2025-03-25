@@ -1,9 +1,21 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
 import userPic from "../../assets/Ellipse 234.svg";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import ChangePassword from "../../Auth/ChangePassword/ChangePassword";
+import { imageURL } from "../../services/api/apiConfig";
+import EditProfile from "../../Auth/EditProfile/EditProfile";
 export default function Navbar() {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    logout();
 
+    toast.success("Logged out successfully");
+    navigate("/login");
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <button
@@ -28,27 +40,33 @@ export default function Navbar() {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <img src={userPic} className="img-fluid me-2" alt="" />
+              <img
+                src={user?.imagePath ? imageURL + user?.imagePath : userPic}
+                className="me-2 bg-success rounded-5"
+                width="50px"
+                height="50px"
+                alt=""
+              />
 
               <span className="me-2">{user?.userName}</span>
             </a>
-            {/* <ul className="dropdown-menu dropdown-menu-end">
+            <ul className="dropdown-menu dropdown-menu-end">
               <li>
-                <button className="dropdown-item" type="button">
-                  Action
-                </button>
+                <EditProfile />
               </li>
               <li>
-                <button className="dropdown-item" type="button">
-                  Another action
-                </button>
+                <ChangePassword />
               </li>
               <li>
-                <button className="dropdown-item" type="button">
-                  Something else here
+                <button
+                  className="dropdown-item"
+                  type="button"
+                  onClick={handleLogout}
+                >
+                  Logout
                 </button>
               </li>
-            </ul> */}
+            </ul>
           </li>
         </ul>
       </div>

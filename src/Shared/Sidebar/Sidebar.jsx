@@ -94,7 +94,7 @@ export default function SideBar() {
           </MenuItem>
         )}
 
-        <ChangePassword />
+        <ChangePassword SidebarItem />
         <MenuItem
           onClick={handleLogout}
           icon={<i className="fa fa-right-from-bracket" />}

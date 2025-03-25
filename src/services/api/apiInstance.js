@@ -5,9 +5,21 @@ const apiInstance = axios.create({
   baseURL,
 });
 
-const priveteApiInstance = axios.create({
+const privateApiInstance = axios.create({
   baseURL,
-  headers: { Authorization: localStorage.getItem("token") },
 });
 
-export { priveteApiInstance, apiInstance };
+privateApiInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token"); // Get fresh token
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export { privateApiInstance, apiInstance };

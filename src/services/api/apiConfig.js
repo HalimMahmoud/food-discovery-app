@@ -7,10 +7,11 @@ export const users_endpoints = {
   VERIFY: `/Users/Verify`,
   RESET_REQUEST: `/Users/Reset/Request`,
   RESET: `/Users/Reset`,
-  GET_USER: (id) => `/Users/${id}`,
+  GET_USER: `/Users/currentUser/`,
   GET_ALL_USERS: `/Users/`,
   DELETE_USER: (id) => `/Users/${id}`,
   CHANGE_PASSWORD: `/Users/ChangePassword`,
+  UPDATE_USER: `/Users/`,
 };
 
 export const categories_endpoints = {

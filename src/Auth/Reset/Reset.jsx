@@ -151,7 +151,13 @@ export default function Reset() {
           className="btn btn-success w-100 mt-5"
           disabled={isSubmitting}
         >
-          {isSubmitting ? <i className="fa fa-spinner"></i> : "Reset Password"}
+          {isSubmitting ? (
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : (
+            "Reset Password"
+          )}
         </button>
       </form>
     </div>

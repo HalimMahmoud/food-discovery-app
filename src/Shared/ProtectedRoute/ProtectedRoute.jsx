@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
 // eslint-disable-next-line react/prop-types
 export default function ProtectedRoute({ children }) {
-  const { user } = useContext(AuthContext);
-
-  return localStorage.getItem("token") || user ? children : <Navigate to="/" />;
+  const { token } = useContext(AuthContext);
+  return token ? children : <Navigate to="/" />;
 }

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import Header from "../../Shared/Header/Header";
 
-import { priveteApiInstance } from "../../services/api/apiInstance";
+import { privateApiInstance } from "../../services/api/apiInstance";
 import { imageURL, users_endpoints } from "../../services/api/apiConfig";
 import { toast } from "react-toastify";
 import DeleteConfirmation from "../../Shared/Modal/DeleteConfirmation";
 // import DeleteConfirmation from "../../Shared/Model/DeleteConfirmation";
 import NoData from "../../Shared/NoData/NoData";
 import Pagination from "../../Shared/Pagination/Pagination";
+import NoDataImg from "../../assets/Group 48102290.png";
 
 export default function UsersList() {
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -32,7 +33,7 @@ export default function UsersList() {
     country
   ) => {
     try {
-      const response = await priveteApiInstance.get(
+      const response = await privateApiInstance.get(
         users_endpoints.GET_ALL_USERS,
         {
           params: {
@@ -67,7 +68,7 @@ export default function UsersList() {
   // handle delete category logic
   const deleteUser = async (selectedId) => {
     try {
-      await priveteApiInstance.delete(users_endpoints.DELETE_USER(selectedId));
+      await privateApiInstance.delete(users_endpoints.DELETE_USER(selectedId));
       toast.success("User is deleted successfully");
       getAllUsers();
     } catch (error) {
@@ -227,7 +228,12 @@ export default function UsersList() {
                 <tr key={user.id}>
                   <td>{user.userName}</td>
                   <td>
-                    <img src={imageURL + user.imagePath} width="200px" />
+                    <img
+                      src={
+                        user.imagePath ? imageURL + user.imagePath : NoDataImg
+                      }
+                      width="200px"
+                    />
                   </td>
                   <td>{user.phoneNumber}</td>
                   <td>{user.email}</td>

@@ -85,7 +85,13 @@ export default function Verfiy() {
           className="btn btn-success w-100 mt-5"
           disabled={isSubmitting}
         >
-          {isSubmitting ? <i className="fa fa-spinner"></i> : "Send"}
+          {isSubmitting ? (
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : (
+            "Send"
+          )}
         </button>
       </form>
     </div>

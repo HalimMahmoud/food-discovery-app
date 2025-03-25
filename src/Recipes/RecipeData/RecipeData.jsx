@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { recipeDataSehemaValidation } from "../../services/vaildators";
-import { priveteApiInstance } from "../../services/api/apiInstance";
+import { privateApiInstance } from "../../services/api/apiInstance";
 import {
   categories_endpoints,
   recipes_endpoints,
@@ -24,7 +24,7 @@ export default function RecipeData() {
     setRecipeData,
   ] = useState({});
   const getRecipeData = async (id) => {
-    const response = await priveteApiInstance.get(
+    const response = await privateApiInstance.get(
       recipes_endpoints.GET_RECIPE(id)
     );
     console.log(category, tag);
@@ -58,7 +58,7 @@ export default function RecipeData() {
   const [categories, setCategories] = useState([]);
   const getAllCategories = async () => {
     try {
-      const response = await priveteApiInstance.get(
+      const response = await privateApiInstance.get(
         categories_endpoints.GET_ALL_CATEGORIES
       );
 
@@ -70,7 +70,7 @@ export default function RecipeData() {
 
   const getAllTags = async () => {
     try {
-      const response = await priveteApiInstance.get(
+      const response = await privateApiInstance.get(
         tags_endpoints.GET_ALL_TAGS
       );
       setTags(response?.data);
@@ -88,7 +88,7 @@ export default function RecipeData() {
 
     try {
       if (params.id) {
-        await priveteApiInstance.put(
+        await privateApiInstance.put(
           recipes_endpoints.UPDATE_RECIPE(params.id),
           formData,
 
@@ -100,7 +100,7 @@ export default function RecipeData() {
         );
         toast.success("Recipe is edited successfully");
       } else {
-        const response = await priveteApiInstance.post(
+        const response = await privateApiInstance.post(
           recipes_endpoints.ADD_RECIPE,
           formData,
           {

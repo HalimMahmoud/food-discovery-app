@@ -4,10 +4,9 @@ import BgImg from "../../assets/ella-olsson-C1Q3qOTlegg-unsplash 1.png";
 
 import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
-// eslint-disable-next-line react/prop-types
 export default function AuthLayer() {
-  const { user } = useContext(AuthContext);
-  if (localStorage.getItem("token") || user) {
+  const { token } = useContext(AuthContext);
+  if (token) {
     return <Navigate to="/dashboard" />;
   }
 

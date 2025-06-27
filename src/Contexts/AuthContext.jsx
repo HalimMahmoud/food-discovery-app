@@ -5,56 +5,69 @@ import { users_endpoints } from "../services/api/apiConfig";
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext();
 
-const useLocalStorage = (key) => {
-  const [value, setValue] = useState(localStorage.getItem(key) || null);
+import React, { useMemo } from "react";
 
-  useEffect(() => {
-    const handleStorageChange = (event) => {
-      if (event.key === key) {
-        setValue(event.newValue);
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [key]);
-
-  const setStoredValue = (newValue) => {
-    localStorage.setItem(key, newValue);
-    setValue(newValue); // Update state for same-tab updates
+// eslint-disable-next-line react-refresh/only-export-components
+export function useLocalStorage() {
+  const setValue = (newValue) => {
+    window.localStorage.setItem("token", newValue);
+    window.dispatchEvent(
+      new StorageEvent("storage", { key: "token", newValue })
+    );
   };
 
-  return [value, setStoredValue];
-};
+  const getSnapshot = () => localStorage.getItem("token");
+
+  const subscribe = (listener) => {
+    window.addEventListener("storage", listener);
+    return () => void window.removeEventListener("storage", listener);
+  };
+
+  const store = React.useSyncExternalStore(subscribe, getSnapshot);
+
+  const value = useMemo(() => store, [store]);
+  const removeValue = () => {
+    window.localStorage.removeItem("token");
+  };
+
+  return [value, setValue, removeValue];
+}
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
-  const [token, setToken] = useLocalStorage("token");
+  const [token, setToken, removeToken] = useLocalStorage();
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const getUserData = async () => {
     try {
-      const response = await privateApiInstance.get(users_endpoints.GET_USER, {
-        "access-control-allow-origin": "*",
-      });
+      const response = await privateApiInstance.get(users_endpoints.GET_USER);
 
       setUser(response.data);
     } catch (error) {
-      console.log(error);
+      console.log("❌ Error fetching user data:", error);
+      logout();
+    } finally {
+      setLoading(false);
     }
   };
-  useEffect(() => {
-    if (token) {
-      getUserData();
-    }
-  }, [token]);
-  const logout = () => {
-    localStorage.removeItem("token");
 
-    setToken(null);
+  useEffect(() => {
+    // If there's a valid token and user data hasn't been fetched yet, fetch user data
+    if (token) {
+      if (!user) {
+        getUserData();
+      } else {
+        setLoading(false); // Don't fetch again if user is already set
+      }
+    } else {
+      setLoading(false); // Set loading to false if no token is present
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, user]);
+  const logout = () => {
+    removeToken();
     setUser(null);
   };
 
@@ -70,7 +83,7 @@ const AuthProvider = ({ children }) => {
         isAdmin,
       }}
     >
-      {children}
+      {loading ? <div>Loading</div> : children}
     </AuthContext.Provider>
   );
 };

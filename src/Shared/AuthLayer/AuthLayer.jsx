@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
 export default function AuthLayer() {
   const { token } = useContext(AuthContext);
+
   if (token) {
     return <Navigate to="/dashboard" />;
   }

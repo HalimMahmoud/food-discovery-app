@@ -9,7 +9,6 @@ import {
 
 import NoDataImg from "../../assets/Group 48102290.png";
 
-import Header from "../../Shared/Header/Header";
 import DeleteConfirmation from "../../Shared/Modal/DeleteConfirmation";
 import { privateApiInstance } from "../../services/api/apiInstance";
 import { toast } from "react-toastify";
@@ -19,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
+import PageHeader from "../../Shared/PageHeader/PageHeader";
 export default function RecipesList() {
   const navigate = useNavigate();
   // handle fetch logic
@@ -152,7 +152,7 @@ export default function RecipesList() {
 
   return (
     <div className="">
-      <Header
+      <PageHeader
         title="Recipes"
         tag="Items"
         description="You can now add your items that any user can order it from the application and you can edit"
@@ -166,7 +166,7 @@ export default function RecipesList() {
           className="btn btn-success my-auto"
           onClick={() => navigate("new")}
         >
-          Add new Recipe
+          Add New Recipe
         </button>
       </div>
 

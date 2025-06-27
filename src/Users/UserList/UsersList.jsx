@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../../Shared/Header/Header";
 
 import { privateApiInstance } from "../../services/api/apiInstance";
 import { imageURL, users_endpoints } from "../../services/api/apiConfig";
@@ -9,6 +8,7 @@ import DeleteConfirmation from "../../Shared/Modal/DeleteConfirmation";
 import NoData from "../../Shared/NoData/NoData";
 import Pagination from "../../Shared/Pagination/Pagination";
 import NoDataImg from "../../assets/Group 48102290.png";
+import PageHeader from "../../Shared/PageHeader/PageHeader";
 
 export default function UsersList() {
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -104,7 +104,7 @@ export default function UsersList() {
   };
   return (
     <div>
-      <Header
+      <PageHeader
         title="Users"
         tag="Items"
         description="You can now add your items that any user can order it from the application and you can edit"

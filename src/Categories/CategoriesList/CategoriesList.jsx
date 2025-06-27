@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../../Shared/Header/Header";
 // import AddEditCategory from "../../Shared/Modal/AddEditCategory";
 // import AddCategory from "../../Shared/Modal/AddEditCategory";
 import { privateApiInstance } from "../../services/api/apiInstance";
@@ -10,6 +9,7 @@ import DeleteConfirmation from "../../Shared/Modal/DeleteConfirmation";
 import NoData from "../../Shared/NoData/NoData";
 import Pagination from "../../Shared/Pagination/Pagination";
 import CategoryData from "../CategoryData/CategoryData";
+import PageHeader from "../../Shared/PageHeader/PageHeader";
 
 export default function CategoriesList() {
   // handle fetch logic
@@ -94,7 +94,7 @@ export default function CategoriesList() {
 
   return (
     <div>
-      <Header
+      <PageHeader
         title="Categories"
         tag="Items"
         description="You can now add your items that any user can order it from the application and you can edit"

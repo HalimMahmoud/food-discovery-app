@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Header from "../Shared/Header/Header";
 import { favs_endpoints, imageURL } from "../services/api/apiConfig";
 import { privateApiInstance } from "../services/api/apiInstance";
 import { toast } from "react-toastify";
 import NoData from "../Shared/NoData/NoData";
 import DeleteConfirmation from "../Shared/Modal/DeleteConfirmation";
 import NoDataImg from "../assets/Group 48102290.png";
+import PageHeader from "../Shared/PageHeader/PageHeader";
 
 export default function FavoriteList() {
   const [userRecipes, setUserRecipes] = useState([]);
@@ -55,7 +55,7 @@ export default function FavoriteList() {
   return (
     <div>
       <div className="">
-        <Header
+        <PageHeader
           title="Favorites"
           tag="Items"
           description="You can now add your items that any user can order it from the application and you can edit"

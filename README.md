@@ -52,10 +52,18 @@ It was a great experience fine-tuning performance while keeping the UI intuitive
 
 ## 🧱 Tech Stack
 
-- **Frontend**: React + Bootstrap
-- **Backend**: Node.js / Express
-- **Database**: MongoDB
-- **Authentication**: JWT (JSON Web Tokens)
+### 🖥️ Frontend
+
+- **React** – Core UI framework
+- **React Router DOM** – Declarative routing
+- **React Hook Form** – Form handling and validation
+- **Yup** – Schema-based validation
+- **React Bootstrap** – Bootstrap UI components in React
+- **Fontawesome** – Icon library
+- **React Pro Sidebar** – Sidebar navigation layout
+- **React Toastify** – Toast-style notifications
+- **Axios** – Promise-based HTTP client for API requests
+- **JWT Decode** – Decode and read JWT tokens on the client
 
 ---
 
@@ -64,8 +72,8 @@ It was a great experience fine-tuning performance while keeping the UI intuitive
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/food-app.git
-cd food-app
+git clone https://github.com/your-username/foodapp.git
+cd foodapp
 ```
 
 ---
@@ -95,8 +103,15 @@ npm run dev
 Use this test user to try the app:
 
 ```
-Username: test
-Password: test
+🔑 Admin Login:
+ 📧 Email: halimmahmoud50@gmail.com
+ 🔑 Password: Halim&123
+---
+🔑 User Login:
+ 📧 Email: halim_mahmoud50@yahoo.com
+ 🔑 Password: Halim&123
+---
+
 ```
 
 You can also register a new account to explore the full authentication flow.

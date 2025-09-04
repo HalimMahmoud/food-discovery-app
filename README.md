@@ -1,102 +1,60 @@
-# 🍽️ Food App
+# 🍽️ Food Discovery App
 
-Food Management App! 🎉  
-Built with React, this app helps users efficiently manage and explore food recipes.  
-It was a great experience fine-tuning performance while keeping the UI intuitive. Would love to hear feedback and insights from fellow developers!
+The **Food Discovery App** is a modern web application that helps users explore, search, and discover a wide variety of recipes from different cuisines.  
+Users can browse trending dishes, filter by ingredients or categories, and save their favorite recipes to a **wishlist** for quick access later.
 
----
-
-## ✨ Features
-
-### 🧑‍🍳 Recipes
-
-- Admins can **Create / Read / Update / Delete** recipes
-- Users can **view** all available recipes
-
-### 🗂️ Categories
-
-- Admins can **Create / Read / Update / Delete** recipe categories
-- Users can **view** all available categories
-
-### ❤️ Favorites (Users Only)
-
-- Logged-in users can **add recipes to their favorites**
-- Users can view and manage their favorite recipes
-- Admins do **not** have a favorites section
-
-### 🔐 Authentication
-
-- Register new users
-- Login/logout functionality
-- Forget password & reset via email
-- Change password (while logged in)
-- Email verification process
-- Authenticated routes for admins
+For content management, the app includes an **Admin Dashboard** with full **CRUD functionality** (Create, Read, Update, Delete) so admins can manage recipes, categories, and keep the recipe library fresh and up to date.
 
 ---
 
-## 🧑‍💻 User Roles
+## 🚀 Features
 
-- **Admin**:
-
-  - Full access to manage recipes and categories
-  - Can view all users (internally, no user list is exposed to UI)
-
-- **Regular Users**:
-  - Can register and log in
-  - Can view recipes and their categories
-  - Can **add and manage favorite recipes**
-  - Cannot create or modify recipes or categories
-
----
-
-## 🧱 Tech Stack
-
-### 🖥️ Frontend
-
-- **React** – Core UI framework
-- **React Router DOM** – Declarative routing
-- **React Hook Form** – Form handling and validation
-- **Yup** – Schema-based validation
-- **React Bootstrap** – Bootstrap UI components in React
-- **Fontawesome** – Icon library
-- **React Pro Sidebar** – Sidebar navigation layout
-- **React Toastify** – Toast-style notifications
-- **Axios** – Promise-based HTTP client for API requests
-- **JWT Decode** – Decode and read JWT tokens on the client
+- 🔎 **Recipe Discovery** – Explore a large variety of dishes across cuisines and categories
+- 🍴 **Search & Filter** – Find recipes by name, ingredient, or category
+- ❤️ **Wishlist / Favorites** – Save and manage favorite recipes
+- 👩‍🍳 **Admin Panel** – Full CRUD operations for recipes
+  - ➕ Create new recipes
+  - 📖 View all recipes
+  - ✏️ Update recipe details
+  - ❌ Delete outdated or duplicate recipes
+- 📱 **Responsive Design** – Optimized for desktop and mobile
+- ⚡ **Modern UI/UX** – Built with TailwindCSS & component libraries
 
 ---
 
-## 🚀 Getting Started
+## 🛠 Tech Stack
 
-### Clone the repository
+- **Frontend:** React + Vite
+- **Styling:** TailwindCSS, Radix UI, utility libraries (`clsx`, `tailwind-merge`)
+- **State Management:** Redux Toolkit, React Redux
+- **Forms & Validation:** React Hook Form, Zod
+- **Routing:** React Router
+- **Utilities:** Axios, Date-fns
+- **Notifications:** React Toastify, Sonner
+- **Deployment:** GitHub Pages / Vercel / Netlify
+
+---
+
+## 📦 Installation
+
+### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/foodapp.git
-cd foodapp
+git clone https://github.com/your-username/food-discovery-app.git
+cd food-discovery-app
 ```
 
----
-
-## ✅ Installing
-
-### Install all dependencies (root-level):
+### 2. Install Dependencies
 
 ```bash
-npm i
+npm install
 ```
 
----
-
-## ▶️ Running the App
-
-From the root directory:
+### 3. Run the App
 
 ```bash
 npm run dev
 ```
-
----
 
 ## 🔑 Credentials
 
@@ -111,23 +69,3 @@ You can use the following demo accounts to log in:
 
 - **Email:** `glynnisinquisitive@powerscrews.com`
 - **Password:** `Admin@123`
-
-You can also register a new account to explore the full authentication flow.
-
-## 🌱 Environment Variables
-
-Create a `.env` file
-
-```env
-SERVER_URL=https://upskilling-egypt.com:3006/api/v1
-```
-
----
-
-## 🙌 Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
----
-
-Made with ❤️ for food lovers and developers! with Collabration by Upskilling Team

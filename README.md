@@ -98,25 +98,21 @@ npm run dev
 
 ---
 
-## 🔐 Test Account
+## 🔑 Credentials
 
-Use this test user to try the app:
+You can use the following demo accounts to log in:
 
-```
-🔑 Admin Login:
- 📧 Email: halimmahmoud50@gmail.com
- 🔑 Password: Halim&123
----
-🔑 User Login:
- 📧 Email: halim_mahmoud50@yahoo.com
- 🔑 Password: Halim&123
----
+### 👤 User Account
 
-```
+- **Email:** `4167blue@powerscrews.com`
+- **Password:** `Pass@123`
+
+### 🛠️ Admin Account
+
+- **Email:** `glynnisinquisitive@powerscrews.com`
+- **Password:** `Admin@123`
 
 You can also register a new account to explore the full authentication flow.
-
----
 
 ## 🌱 Environment Variables
 
